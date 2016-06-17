@@ -1,2 +1,3 @@
 # robot-dashboard
-Dashboard to make a UI for the robot while running code
+
+FRC Team #8 project to make a better robot dashboard.
