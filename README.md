@@ -9,7 +9,13 @@ Python 3 must be installed!
 
 Make sure you have pynetworktables2 installed:
 
+Linux/OSX:
+
     pip install pynetworktables2js
+
+Windows:
+
+    py -m pip install pynetworktables2js
 
 
 
