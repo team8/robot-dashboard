@@ -2,11 +2,15 @@
 <head>
 	<title>FRC Team #8 Dashboard</title>
 	<script src="/networktables/networktables.js"></script>
-	<script src="JS/Core.js"></script>
 	<script src="JS/jquery.min.js"></script>
+	<script src="JS/Core.js"></script>
 	<link rel="stylesheet" type="text/css" href="Stylesheets/Main.css">
 </head>
 <body>
-
+	<div class="header">
+		<p class="innerheader" onclick="onNavClick('match')">Match View</p>
+		<p class="innerheader" onclick="onNavClick('debug')">Debug View</p>
+		<img id="locked" src="Images/unlocked.jpeg" onclick='updateLocked()'></img>
+	</div>
 </body>
 </html>

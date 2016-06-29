@@ -1,0 +1,28 @@
+body{
+	margin: 0;
+	padding: 0;
+	background-color: #3d8e15
+}
+
+.header {
+	width: 100%;
+	height: 50px;
+	background-color: white;
+	text-align: center;
+}
+
+.innerheader {
+	color: black;
+	font-size: 30px;
+	line-height: 50px;
+	margin-left: 50px;
+	margin-right: 50px;
+	display: inline;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
+}
+
+#locked {
+	width: 30px;
+	height: 30px;
+	/*padding-top: 10px;*/
+}
