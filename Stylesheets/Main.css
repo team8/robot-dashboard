@@ -1,7 +1,7 @@
 body{
 	margin: 0;
 	padding: 0;
-	background-color: #3d8e15
+	background-color: #3d8e15;
 }
 
 .header {
@@ -19,10 +19,39 @@ body{
 	margin-right: 50px;
 	display: inline;
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
+	cursor: not-allowed;
+}
+
+.testmatchobject {
+	color: #3d8e15;
+	background-color: white;
+	text-align: center;
+	font-size: 25px;
+	position: absolute;
+	left: 50px;
+	top: 60px;
+	width: 500px;
+	height: 250px;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
+}
+
+.testdebugobject {
+	color: cyan;
+	background-color: black;
+	text-align: center;
+	font-size: 25px;
+	position: absolute;
+	right: 50px;
+	bottom: 60px;
+	width: 300px;
+	height: 270px;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
+	visibility: hidden;
 }
 
 #locked {
 	width: 30px;
 	height: 30px;
 	/*padding-top: 10px;*/
+	cursor: pointer;
 }
