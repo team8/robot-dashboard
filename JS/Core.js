@@ -1,5 +1,5 @@
 /*
-Document structural elements. 
+Document structural elements.
 */
 var Navbar = {
 	locked: false,
@@ -9,48 +9,55 @@ var Navbar = {
 		lock_img: "../Images/locked_img.jpeg"
 	},
 	MatchView: {
-		in_: true, elem: null
+		in_: true,
+		elem: null
 	},
 	DebugView: {
 		in_: false,
 		elem: null
 	}
-} 
+}
 
 function setElementStatus() {
 	Navbar.img.elem = document.getElementById("locked")
 	Navbar.MatchView.elem = document.getElementsByClassName("innerheader")[0]
 	Navbar.DebugView.elem = document.getElementsByClassName("innerheader")[1]
-	Navbar.MatchView.elem.style.backgroundColor = "#3d8e15"
-	Navbar.MatchView.elem.style.color = "white"
+	Navbar.MatchView.elem.style.textDecoration = "underline"
 }
 function onNavClick(view) {
 	if (view == 'match') {
 		if (Navbar.locked == true) return
 		Navbar.MatchView.in_ = !Navbar.MatchView.in_
 		Navbar.DebugView.in_ = !Navbar.MatchView.in_
-		// The selected view mode header will have a green background and white text
-		Navbar.MatchView.elem.style.backgroundColor = "#3d8e15"
-		Navbar.DebugView.elem.style.backgroundColor = ""
-		Navbar.MatchView.elem.style.color = "white"
-		Navbar.DebugView.elem.style.color = ""
-		// Toggles the two display objects(one for each view)
-		// Should probably put these in a structural element
-		document.getElementsByClassName("testmatchobject")[0].style.visibility="visible"
-		document.getElementsByClassName("testdebugobject")[0].style.visibility="hidden"
+		onMatchElemFunc()
 	} else {
 		// view == 'debug'
 		if (Navbar.locked == true) return
 		Navbar.DebugView.in_ = !Navbar.DebugView.in_
 		Navbar.MatchView.in_ = !Navbar.DebugView.in_
-		Navbar.DebugView.elem.style.backgroundColor = "#3d8e15"
-		Navbar.MatchView.elem.style.backgroundColor = ""
-		Navbar.DebugView.elem.style.color = "white"
-		Navbar.MatchView.elem.style.color = ""
-		document.getElementsByClassName("testmatchobject")[0].style.visibility="hidden"
-		document.getElementsByClassName("testdebugobject")[0].style.visibility="visible"
+		onDebugElemFunc()
 	}
 } 
+
+/*
+Do something to the elements on match view select.
+*/
+function onMatchElemFunc() {
+	Navbar.MatchView.elem.style.textDecoration = "underline"
+	Navbar.DebugView.elem.style.textDecoration = ""	
+	document.getElementsByClassName("testmatchobject")[0].style.visibility="visible"
+	document.getElementsByClassName("testdebugobject")[0].style.visibility="hidden"
+}
+
+/*
+Do something to the elements on debug mode select.
+*/
+function onDebugElemFunc() {
+	Navbar.MatchView.elem.style.textDecoration = ""
+	Navbar.DebugView.elem.style.textDecoration = "underline"
+	document.getElementsByClassName("testmatchobject")[0].style.visibility="hidden"
+	document.getElementsByClassName("testdebugobject")[0].style.visibility="visible"	
+}
 /*
 Updates the Status of the Lock Icon
 */
@@ -69,14 +76,14 @@ function updateLocked() {
 }
 
 $(document).ready(function(){
-		setElementStatus()
-		updateLocked()
-		// sets a function that will be called when the websocket connects/disconnects
-		NetworkTables.addWsConnectionListener(onNetworkTablesConnection, true);
-		// sets a function that will be called when the robot connects/disconnects
-		NetworkTables.addRobotConnectionListener(onRobotConnection, true);
-		// sets a function that will be called when any NetworkTables key/value changes
-		NetworkTables.addGlobalListener(onValueChanged, true);
+	setElementStatus()
+	updateLocked()
+	// sets a function that will be called when the websocket connects/disconnects
+	NetworkTables.addWsConnectionListener(onNetworkTablesConnection, true);
+	// sets a function that will be called when the robot connects/disconnects
+	NetworkTables.addRobotConnectionListener(onRobotConnection, true);
+	// sets a function that will be called when any NetworkTables key/value changes
+	NetworkTables.addGlobalListener(onValueChanged, true);
 });
 
 /*
