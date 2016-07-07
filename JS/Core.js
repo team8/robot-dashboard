@@ -22,22 +22,42 @@ function setElementStatus() {
 	Navbar.img.elem = document.getElementById("locked")
 	Navbar.MatchView.elem = document.getElementsByClassName("innerheader")[0]
 	Navbar.DebugView.elem = document.getElementsByClassName("innerheader")[1]
+	Navbar.MatchView.elem.style.textDecoration = "underline"
 }
-
 function onNavClick(view) {
 	if (view == 'match') {
 		if (Navbar.locked == true) return
-		Navbar.MatchView.in_ = !Navbar.MatchView.in_ 
+		Navbar.MatchView.in_ = !Navbar.MatchView.in_
 		Navbar.DebugView.in_ = !Navbar.MatchView.in_
-	}
-	else {
+		onMatchElemFunc()
+	} else {
 		// view == 'debug'
 		if (Navbar.locked == true) return
 		Navbar.DebugView.in_ = !Navbar.DebugView.in_
 		Navbar.MatchView.in_ = !Navbar.DebugView.in_
+		onDebugElemFunc()
 	}
+} 
+
+/*
+Do something to the elements on match view select.
+*/
+function onMatchElemFunc() {
+	Navbar.MatchView.elem.style.textDecoration = "underline"
+	Navbar.DebugView.elem.style.textDecoration = ""	
+	document.getElementsByClassName("testmatchobject")[0].style.visibility="visible"
+	document.getElementsByClassName("testdebugobject")[0].style.visibility="hidden"
 }
 
+/*
+Do something to the elements on debug mode select.
+*/
+function onDebugElemFunc() {
+	Navbar.MatchView.elem.style.textDecoration = ""
+	Navbar.DebugView.elem.style.textDecoration = "underline"
+	document.getElementsByClassName("testmatchobject")[0].style.visibility="hidden"
+	document.getElementsByClassName("testdebugobject")[0].style.visibility="visible"	
+}
 /*
 Updates the Status of the Lock Icon
 */
@@ -45,12 +65,15 @@ function updateLocked() {
 	Navbar.locked = !Navbar.locked
 	if (Navbar.locked) {
 		Navbar.img.elem.src = Navbar.img.lock_img;
-	}
-	else {
+		// The mouse will display a certain symbol when hovering over the headers
+		Navbar.MatchView.elem.style.cursor = "not-allowed"
+		Navbar.DebugView.elem.style.cursor = "not-allowed"
+	} else {
 		Navbar.img.elem.src = Navbar.img.unlocked_img;
+		Navbar.MatchView.elem.style.cursor = "pointer"
+		Navbar.DebugView.elem.style.cursor = "pointer"
 	}
 }
-
 
 $(document).ready(function(){
 	setElementStatus()
