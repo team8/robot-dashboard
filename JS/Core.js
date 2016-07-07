@@ -45,8 +45,12 @@ Do something to the elements on match view select.
 function onMatchElemFunc() {
 	Navbar.MatchView.elem.style.textDecoration = "underline"
 	Navbar.DebugView.elem.style.textDecoration = ""	
-	document.getElementsByClassName("testmatchobject")[0].style.visibility="visible"
-	document.getElementsByClassName("testdebugobject")[0].style.visibility="hidden"
+	Array.prototype.forEach.call(document.getElementsByClassName("match-container"), function(element) {
+    	element.style.visibility = "visible"
+	});
+	Array.prototype.forEach.call(document.getElementsByClassName("debug-container"), function(element) {
+    	element.style.visibility = "hidden"
+	});
 }
 
 /*
@@ -55,8 +59,13 @@ Do something to the elements on debug mode select.
 function onDebugElemFunc() {
 	Navbar.MatchView.elem.style.textDecoration = ""
 	Navbar.DebugView.elem.style.textDecoration = "underline"
-	document.getElementsByClassName("testmatchobject")[0].style.visibility="hidden"
-	document.getElementsByClassName("testdebugobject")[0].style.visibility="visible"	
+	Array.prototype.forEach.call(document.getElementsByClassName("match-container"), function(element) {
+		element.style.visibility = "hidden"
+	});
+	Array.prototype.forEach.call(document.getElementsByClassName("debug-container"), function(element) {
+    	element.style.visibility = "visible"
+    	console.log("hi")
+	});
 }
 /*
 Updates the Status of the Lock Icon
@@ -78,6 +87,7 @@ function updateLocked() {
 $(document).ready(function(){
 	setElementStatus()
 	updateLocked()
+	onMatchElemFunc()
 	// sets a function that will be called when the websocket connects/disconnects
 	NetworkTables.addWsConnectionListener(onNetworkTablesConnection, true);
 	// sets a function that will be called when the robot connects/disconnects

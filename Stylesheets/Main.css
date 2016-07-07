@@ -22,7 +22,14 @@ body{
 	cursor: not-allowed;
 }
 
-.testmatchobject {
+div.match-container {
+}
+
+div.debug-container {
+	visibility: "";
+}
+
+.a-match-object {
 	color: #3d8e15;
 	background-color: white;
 	text-align: center;
@@ -35,7 +42,7 @@ body{
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
 }
 
-.testdebugobject {
+.a-debug-object {
 	color: cyan;
 	background-color: black;
 	text-align: center;
@@ -46,7 +53,6 @@ body{
 	width: 300px;
 	height: 270px;
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
-	visibility: hidden;
 }
 
 #locked {
