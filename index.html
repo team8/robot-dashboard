@@ -26,6 +26,7 @@
 	<div id="gameperiodrectangle"></div>
 	<div id="brownoutstatusrectangle"></div>
 	<div id="batterystatusrectangle"></div>
+	<div id="chooserrectangle"></div>
 
 	<div class="robot-status"> 
 		<p id="robostatus">Robot status unavailable</p>
@@ -34,6 +35,7 @@
 		<p id="game-period">Game Period: Not in a match</p>
 		<p id="brownout-status">Brownout status: Robot disconnected</p>
 		<p id="battery"> Battery voltage: Robot disconnected</p>
+		<p id="autonomouspath">Current auto path: None</p>
 	</div>
 
 	<div id="drivetrainanimation"></div>
@@ -54,5 +56,12 @@
 		<p id="breachermicrostate"></p>
 	</div>
 	
+	<form>
+		<label for="chooser" id="autochooser"> Auto mode chooser: </label>
+		<input type="text" id="chooser" name="chooser"> 	
+		<input type="button" id="chooserbutton" value="Submit" onclick="submitAutoPath()">
+		<label id = "autochooserstatus"> Auto path set </label>
+	</form>
+
 </body>
 </html>

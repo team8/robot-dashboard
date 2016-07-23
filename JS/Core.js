@@ -173,6 +173,19 @@ function unfade(e) {
 }
 
 /*
+Retrieves the entered autonomous path from the input form
+and submits it to the networktables 
+*/
+function submitAutoPath() {
+	var path = document.getElementById("chooser").value;
+	NetworkTables.putValue(NT_TABLE_ID_ADDRESS + "autopath", path);
+	document.getElementById("autonomouspath").innerHTML = "Current auto path: " + path;
+	document.getElementById("autochooserstatus").style.opacity = 1.0;
+	document.getElementById("chooserrectangle").style.backgroundColor = "green";
+	unfade("chooserrectangle");
+}
+
+/*
 NetworkTable functions.
 */
 function onRobotConnection(connected) {
@@ -271,4 +284,18 @@ function allianceUpdate(key, alliance, isNew) {
 
 function onValueChanged(key, value, isNew) {
 	console.log(key + ": " + value)
+}
+
+function unfade(e) {
+	element = document.getElementById(e);
+    var opacity = 0.0; 
+    element.style.display = 'block';
+    var timer = setInterval(function () {
+        if (opacity >= 1){
+            clearInterval(timer);
+        }
+        element.style.opacity = opacity;
+        element.style.filter = 'alpha(opacity=' + opacity * 100 + ")";
+        opacity += 0.01;
+    }, 10);
 }

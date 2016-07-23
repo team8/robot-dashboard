@@ -215,6 +215,48 @@ div.debug-container {
 	left: 40px;
 }
 
+#chooserrectangle {
+	width: 325px;
+	height: 35px;
+	top: 328px;
+	left: 40px;
+	border-radius: 15px;
+	position: absolute;
+	background-color: orange;
+}
+
+#autochooserstatus {
+	top: 381px;
+	left: 415px;
+	font-size: 20px;
+	position: absolute;
+	opacity: 0;
+}
+
+#autochooser {
+	top: 381px;
+	left: 40px;
+	font-size: 20px;
+	font:Helvetica;
+	position: absolute;
+}
+
+#chooser {
+	top: 380px;
+	left: 230px;
+	width: 7%;
+	height: 3.7%;
+	border-radius: 6px;
+	position: absolute;
+}
+
+#chooserbutton {
+	top: 383px;
+	left: 340px;
+	border-radius: 5px;
+	position: absolute;
+}
+
 .a-match-object {
 	color: #3d8e15;
 	background-color: white;
