@@ -2,6 +2,7 @@ body{
 	margin: 0;
 	padding: 0;
 	background-color: #3d8e15;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
 }
 
 .header {
@@ -30,7 +31,7 @@ div.debug-container {
 }
 
 .robot-status {
-	font-size: 23px;
+	font-size: 20px;
 	margin-left: 50px;
 	position: absolute;
 }
