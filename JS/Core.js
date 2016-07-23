@@ -105,6 +105,8 @@ $(document).ready(function(){
 	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "brownout-status", brownoutUpdate, true);
 
 	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "battery", batteryUpdate, true);
+
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS+ "alliance", allianceUpdate, true);
 });
 
 /*
@@ -113,10 +115,11 @@ NetworkTable functions.
 function onRobotConnection(connected) {
 	if (connected) {
 		document.getElementById("robostatus").innerHTML = "Robot status: CONNECTED";
+		document.getElementById("robotstatusrectangle").style.backgroundColor = "green";
 	} 
 	else {
 		document.getElementById("robostatus").innerHTML = "Robot status: DISCONNECTED";
-		document.getElementById("robostatus").style.color = "B20000";
+		document.getElementById("robotstatusrectangle").style.backgroundColor = "red";
 	}
 }
 
@@ -127,9 +130,10 @@ if not connected
 function onNetworkTablesConnection(connected) {
 	if (connected) {
 		document.getElementById("networkstatus").innerHTML = "Network status: CONNECTED";
+		document.getElementById("networkstatusrectangle").style.backgroundColor = "green";
 	} else {
 		document.getElementById("networkstatus").innerHTML = "Network status: DISCONNECTED";
-		document.getElementById("networkstatus").style.color = "B20000";
+		document.getElementById("networkstatusrectangle").style.backgroundColor = "red";
 	}
 }
 
@@ -140,10 +144,13 @@ and to red if under 15 seconds, with different messages for each.
 function matchTimeUpdate(key, time, isNew) {
 	if (time < 30 && time > 15) {
 		document.getElementById("match-time").innerHTML = "Match almost over: " + time + " seconds left!";
-		document.getElementById("match-time").style.color = "FFCC00";
-	} else if (time < 15) {
+		document.getElementById("matchtimerectangle").style.backgroundColor = "FFCC00";
+	} else if (time <= 15) {
 		document.getElementById("match-time").innerHTML = "Less than 15 seconds: " + time + " seconds left!";
-		document.getElementById("match-time").style.color = "B20000";
+		document.getElementById("matchtimerectangle").style.backgroundColor = "B20000";
+	} else {
+		document.getElementById("match-time").innerHTML = "Match time left: " + time + " seconds left";
+		document.getElementById("matchtimerectangle").style.backgroundColor = "green";
 	}
 }
 
@@ -154,10 +161,10 @@ otherwise remains black.
 function gamePeriodUpdate(key, period, isNew) {
 	if (period == "DISABLED") {
 		document.getElementById("game-period").innerHTML = "Game period: " + period;
-		document.getElementById("game-period").style.color = "B20000";
+		document.getElementById("gameperiodrectangle").style.backgroundColor = "B20000";
 	} else {
 		document.getElementById("game-period").innerHTML = "Game period: " + period;
-		document.getElementById("game-period").style.color = "black";
+		document.getElementById("gameperiodrectangle").style.backgroundColor = "green";
 	}
 }
 
@@ -167,10 +174,10 @@ Displays the battery voltage. Changes color to yellow if voltage is below 7.5
 function batteryUpdate(key, voltage, isNew) {
 	if (voltage < 7.5) {
 		document.getElementById("battery").innerHTML = "We might be browning out at: " + voltage + " volts.";
-		document.getElementById("battery").style.color = "FFCC00";
+		document.getElementById("batterystatusrectangle").style.backgroundColor = "FFCC00";
 	} else {
 		document.getElementById("battery").innerHTML = "Battery voltage: " + voltage + " volts";
-		document.getElementById("battery").style.color = "black";
+		document.getElementById("batterystatusrectangle").style.backgroundColor = "green";
 	}
 }
 
@@ -181,10 +188,21 @@ red with a different message
 function brownoutUpdate(key, status, isNew) { //True for browning out, false if we are good on battery
 	if (status) {
 		document.getElementById("brownout-status").innerHTML = "We are browning out!";
-		document.getElementById("brownout-status").style.color = "B20000";
+		document.getElementById("brownoutstatusrectangle").style.backgroundColor = "B20000";
 	} else {
-		document.getElementById("brownout-status").innerHTML = "Not browning out now. "
-		document.getElementById("brownout-status").style.color = "black";
+		document.getElementById("brownout-status").innerHTML = "Not browning out now.";
+		document.getElementById("brownoutstatusrectangle").style.backgroundColor = "green";
+	}
+}
+
+/*
+Displays what alliance we are on by coloring in the menu bar at the top. 
+*/
+function allianceUpdate(key, alliance, isNew) {
+	if (alliance == "red") {
+		document.getElementById("header").style.backgroundColor = "red";
+	} else if (alliance == "blue") {
+		document.getElementById("header").style.backgroundColor = "blue";
 	}
 }
 
