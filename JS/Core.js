@@ -88,17 +88,101 @@ $(document).ready(function(){
 	setElementStatus()
 	updateLocked()
 	onMatchElemFunc()
+	//onRobotConnection(true)
 	// sets a function that will be called when the websocket connects/disconnects
 	NetworkTables.addWsConnectionListener(onNetworkTablesConnection, true);
 	// sets a function that will be called when the robot connects/disconnects
 	NetworkTables.addRobotConnectionListener(onRobotConnection, true);
 	// sets a function that will be called when any NetworkTables key/value changes
 	NetworkTables.addGlobalListener(onValueChanged, true);
+
+	NetworkTables.addKeyListener("match-time", matchTimeUpdate, true);
+
+	NetworkTables.addKeyListener("game-period", gamePeriodUpdate, true);
+
+	NetworkTables.addKeyListener("brownout-status", brownoutUpdate, true);
+
+	NetworkTables.addKeyListener("battery", batteryUpdate, true);
 });
 
 /*
 NetworkTable functions.
 */
-function onRobotConnection(connected) {}
-function onNetworkTablesConnection(connected) {}
+function onRobotConnection(connected) {
+	if (connected) {
+		document.getElementById("robostatus").innerHTML = "Robot status: CONNECTED";
+	} else {
+			document.getElementById("robostatus").innerHTML = "Robot status: DISCONNECTED";
+			document.getElementById("robostatus").style.color = "B20000";
+	}
+}
+
+/*
+Displays network connection status. Changes color to red
+if not connected 
+*/
+function onNetworkTablesConnection(connected) {
+	if (connected) {
+		document.getElementById("networkstatus").innerHTML = "Network status: CONNECTED";
+	} else {
+		document.getElementById("networkstatus").innerHTML = "Network status: DISCONNECTED";
+		document.getElementById("networkstatus").style.color = "B20000";
+	}
+}
+
+/*
+Displays match time. Changes color to yellow if under 30 seconds 
+and to red if under 15 seconds, with different messages for each.
+*/
+function matchTimeUpdate(time) {
+	if (time < 30 && time > 15) {
+		document.getElementById("match-time").innerHTML = "Match almost over: " + time + " seconds left!";
+		document.getElementById("match-time").style.color = "FFCC00";
+	} else if (time < 15) {
+		document.getElementById("match-time").innerHTML = "Less than 15 seconds: " + time + " seconds left!";
+		document.getElementById("match-time").style.color = "B20000";
+	}
+}
+
+/*
+Displays the game period. Changes color to red if disabled, but
+otherwise remains black. 
+*/
+function gamePeriodUpdate(period) {
+	if (period == "DISABLED") {
+		document.getElementById("game-period").innerHTML = "Game period: " + period;
+		document.getElementById("game-period").style.color = "B20000";
+	} else {
+		document.getElementById("game-period").innerHTML = "Game period: " + period;
+		document.getElementById("game-period").style.color = "black";
+	}
+}
+
+/*
+Displays the battery voltage. Changes color to yellow if voltage is below 7.5
+*/
+function batteryUpdate(voltage) {
+	if (voltage < 7.5) {
+		document.getElementById("battery").innerHTML = "We might be browning out at: " + voltage + " volts.";
+		document.getElementById("battery").style.color = "FFCC00";
+	} else {
+		document.getElementById("battery").innerHTML = "Battery voltage: " + voltage + " volts";
+		document.getElementById("battery").style.color = "black";
+	}
+}
+
+/*
+Displays whether or not we are browning out. If we are, change the color to 
+red with a different message
+*/
+function brownoutUpdate(status) { //True for browning out, false if we are good on battery
+	if (status) {
+		document.getElementById("brownout-status").innerHTML = "We are browning out!";
+		document.getElementById("brownout-status").style.color = "B20000";
+	} else {
+		document.getElementById("brownout-status").innerHTML = "Not browning out now. "
+		document.getElementById("brownout-status").style.color = "black";
+	}
+}
+
 function onValueChanged(key, value, isNew) {}

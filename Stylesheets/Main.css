@@ -29,14 +29,19 @@ div.debug-container {
 	visibility: "";
 }
 
+.robot-status {
+	font-size: 23px;
+	margin-left: 50px;
+	position: absolute;
+}
+
 .a-match-object {
 	color: #3d8e15;
 	background-color: white;
 	text-align: center;
 	font-size: 25px;
 	position: absolute;
-	left: 50px;
-	top: 60px;
+	left: 800px;
 	width: 500px;
 	height: 250px;
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
