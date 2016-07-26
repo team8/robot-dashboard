@@ -94,6 +94,40 @@ div.debug-container {
 	border-radius: 15px;
 	position: absolute;
 	background-color: orange;
+
+#drivetrainstate {
+	font-size: 20px;
+	position: absolute;
+	top: 450px;
+	left:40px;
+}
+
+#shooterstate {
+	font-size: 20px;
+	position: absolute;
+	top: 480px;
+	left:40px;
+}
+
+#grabberstate {
+	font-size: 20px;
+	position: absolute;
+	top: 510px;
+	left:40px;
+}
+
+#accumulatorstate {
+	font-size: 20px;
+	position: absolute;
+	top: 540px;
+	left:40px;
+}
+
+#breacherstate {
+	font-size: 20px;
+	position: absolute;
+	top: 570px;
+	left:40px;
 }
 
 .a-match-object {

@@ -107,8 +107,37 @@ $(document).ready(function(){
 	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "battery", batteryUpdate, true);
 
 	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS+ "alliance", allianceUpdate, true);
+
+	NetworkTables.addKeyListener("drivetrainstate", updateSubsystemState(), true);
+
+	NetworkTables.addKeyListener("grabberstate", updateSubsystemState(), true);
+
+	NetworkTables.addKeyListener("shooterstate", updateSubsystemState(), true);
+
+	NetworkTables.addKeyListener("breacherstate", updateSubsystemState(), true);
+
+	NetworkTables.addKeyListener("accumulatorstate", updateSubsystemState(), true);
 });
 
+function updateSubsystemState(key, value, isNew) {
+	switch(key){
+		case "drivetrainstate":
+		document.getElementById("drivetrainstate").innerHTML = "Drivetrain state: " + value;
+		break;
+		case "grabberstate":
+		document.getElementById("grabberstate").innerHTML = "Grabber state: " + value;
+		break;
+		case "shooterstate":
+		document.getElementById("shooterstate").innerHTML = "Shooter state: " + value;
+		break;
+		case "accumulatorstate":
+		document.getElementById("accumulatorstate").innerHTML = "Accumulator state: " + value;
+		break;
+		case "breacherstate":
+		document.getElementById("breacherstate").innerHTML = "Breacher state: " + value;
+		break;
+	}
+}
 /*
 NetworkTable functions.
 */
