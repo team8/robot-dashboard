@@ -98,6 +98,7 @@ $(document).ready(function(){
 	// sets a function that will be called when any NetworkTables key/value changes
 	NetworkTables.addGlobalListener(onValueChanged, true);
 
+<<<<<<< HEAD
 	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "match-time", matchTimeUpdate, true);
 
 	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "game-period", gamePeriodUpdate, true);
@@ -108,36 +109,56 @@ $(document).ready(function(){
 
 	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS+ "alliance", allianceUpdate, true);
 
-	NetworkTables.addKeyListener("drivetrainstate", updateSubsystemState(), true);
+	NetworkTables.addKeyListener("drivetrainstate", updateDrivetrainState(), true);
 
-	NetworkTables.addKeyListener("grabberstate", updateSubsystemState(), true);
+	NetworkTables.addKeyListener("shooterstate", updateShooterState(), true);
 
-	NetworkTables.addKeyListener("shooterstate", updateSubsystemState(), true);
+	NetworkTables.addKeyListener("grabberstate", updateGrabberState(), true);
 
-	NetworkTables.addKeyListener("breacherstate", updateSubsystemState(), true);
+	NetworkTables.addKeyListener("accumulatorstate", updateAccumulatorState(), true);
 
-	NetworkTables.addKeyListener("accumulatorstate", updateSubsystemState(), true);
+	NetworkTables.addKeyListener("breacherstate", updateBreacherState(), true);
 });
 
-function updateSubsystemState(key, value, isNew) {
-	switch(key){
-		case "drivetrainstate":
-		document.getElementById("drivetrainstate").innerHTML = "Drivetrain state: " + value;
-		break;
-		case "grabberstate":
-		document.getElementById("grabberstate").innerHTML = "Grabber state: " + value;
-		break;
-		case "shooterstate":
-		document.getElementById("shooterstate").innerHTML = "Shooter state: " + value;
-		break;
-		case "accumulatorstate":
-		document.getElementById("accumulatorstate").innerHTML = "Accumulator state: " + value;
-		break;
-		case "breacherstate":
-		document.getElementById("breacherstate").innerHTML = "Breacher state: " + value;
-		break;
-	}
+function updateDrivetrainState(key, value, isNew) {
+	document.getElementById("drivetrainstate").innerHTML = "Drivetrain state: " + value;
+	unfade("drivetrainanimation");
 }
+
+function updateShooterState(key, value, isNew) {
+	document.getElementById("shooterstate").innerHTML = "Shooter state: " + value;
+	unfade("shooteranimation");
+}
+
+function updateGrabberState(key, value, isNew) {
+	document.getElementById("grabberstate").innerHTML = "Grabber state: " + value;
+	unfade("grabberanimation");
+}
+
+function updateAccumulatorState(key, value, isNew) {
+	document.getElementById("accumulatorstate").innerHTML = "Accumulator state: " + value;
+	unfade("accumulatoranimation");
+}
+
+function updateBreacherState(key, value, isNew) {
+	document.getElementById("breacherstate").innerHTML = "Breacher state: " + value;
+	unfade("breacheranimation");
+}
+
+function unfade(e) {
+	element = document.getElementById(e);
+    var opacity = 0.0; 
+    element.style.display = 'block';
+    var timer = setInterval(function () {
+        if (opacity >= 1){
+            clearInterval(timer);
+        }
+        element.style.opacityacity = opacity;
+        element.style.filter = 'alpha(opacityacity=' + opacity * 100 + ")";
+        opacity += 0.03;
+    }, 10);
+}
+
 /*
 NetworkTable functions.
 */

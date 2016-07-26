@@ -95,6 +95,56 @@ div.debug-container {
 	position: absolute;
 	background-color: orange;
 
+#drivetrainanimation {
+	width: 260px;
+	height: 30px;
+	background-color: magenta;
+	position: absolute;
+	top: 467px;
+	left: 30px;
+	border-radius: 15px;
+}
+
+#shooteranimation {
+	width: 250px;
+	height: 30px;
+	background-color: orange;
+	position: absolute;
+	top: 502px;
+	left:30px;
+	border-radius: 15px;
+}
+
+#grabberanimation {
+	width: 252px;
+	height: 30px;
+	background-color: yellow;
+	position: absolute;
+	top: 537px;
+	left: 30px;
+	border-radius: 15px;
+}
+
+#accumulatoranimation {
+	width: 277px;
+	height: 30px;
+	background-color: silver;
+	position: absolute;
+	top: 572px;
+	left: 30px;
+	border-radius: 15px;
+}
+
+#breacheranimation {
+	width: 258px;
+	height: 30px;
+	background-color: pink;
+	position: absolute;
+	top: 607px;
+	left: 30px;
+	border-radius: 15px;
+}
+
 #drivetrainstate {
 	font-size: 20px;
 	position: absolute;
@@ -105,28 +155,28 @@ div.debug-container {
 #shooterstate {
 	font-size: 20px;
 	position: absolute;
-	top: 480px;
+	top: 485px;
 	left:40px;
 }
 
 #grabberstate {
 	font-size: 20px;
 	position: absolute;
-	top: 510px;
+	top: 520px;
 	left:40px;
 }
 
 #accumulatorstate {
 	font-size: 20px;
 	position: absolute;
-	top: 540px;
+	top: 555px;
 	left:40px;
 }
 
 #breacherstate {
 	font-size: 20px;
 	position: absolute;
-	top: 570px;
+	top: 590px;
 	left:40px;
 }
 
