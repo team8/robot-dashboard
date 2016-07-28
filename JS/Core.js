@@ -18,7 +18,7 @@ var Navbar = {
 	}
 }
 
-const NT_TABLE_ID_ADDRESS = "RobotTable/"
+const NT_TABLE_ID_ADDRESS = "/RobotTable/"
 
 function setElementStatus() {
 	Navbar.img.elem = document.getElementById("locked")
