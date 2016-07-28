@@ -166,9 +166,9 @@ function unfade(e) {
         if (opacity >= 1){
             clearInterval(timer);
         }
-        element.style.opacityacity = opacity;
-        element.style.filter = 'alpha(opacityacity=' + opacity * 100 + ")";
-        opacity += 0.03;
+        element.style.opacity = opacity;
+        element.style.filter = 'alpha(opacity=' + opacity * 100 + ")";
+        opacity += 0.01;
     }, 10);
 }
 
