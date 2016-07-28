@@ -206,15 +206,6 @@ function allianceUpdate(key, alliance, isNew) {
 	}
 }
 
-/*
-Puts the selected autonomous path in the network tables for 
-retreival by the robot program. 
-*/
-function submitAutoPath() {
-	var path = document.getElementById("chooser").value;
-	NetworkTables.putValue("autopath", path);
-}
-
 function onValueChanged(key, value, isNew) {
 	console.log(key + ": " + value)
 }
