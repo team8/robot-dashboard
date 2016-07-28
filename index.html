@@ -7,17 +7,34 @@
 	<link rel="stylesheet" type="text/css" href="Stylesheets/Main.css">
 </head>
 <body>
-	<div class="header">
+	<div id="header" class="header">
 		<p class="innerheader" onclick="onNavClick('match')">Match View</p>
 		<p class="innerheader" onclick="onNavClick('debug')">Debug View</p>
 		<img id="locked" src="Images/unlocked.jpeg" onclick='updateLocked()'></img>
 	</div>
 	<!-- Not sure as to how to format this -->
 	<div class="match-container">
-		<p class="a-match-object">Totally Legit Playing Field</p>
+		<p class="a-match-object">Playing Field</p>
 	</div>
 	<div class="debug-container">
-		<p class="a-debug-object">Totally Legit PID Grapher</p>
+		<p class="a-debug-object">PID Grapher</p>
 	</div>
+
+	<div id="robotstatusrectangle"></div>
+	<div id="networkstatusrectangle"></div>
+	<div id="matchtimerectangle"></div>
+	<div id="gameperiodrectangle"></div>
+	<div id="brownoutstatusrectangle"></div>
+	<div id="batterystatusrectangle"></div>
+
+	<div class="robot-status"> 
+		<p id="robostatus">Robot status unavailable</p>
+		<p id="networkstatus">Network status unavailable</p>
+		<p id="match-time">Match time: Not in a match</p>
+		<p id="game-period">Game Period: Not in a match</p>
+		<p id="brownout-status">Brownout status: Robot disconnected</p>
+		<p id="battery"> Battery voltage: Robot disconnected</p>
+	</div>
+
 </body>
 </html>
