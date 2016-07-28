@@ -143,13 +143,13 @@ and to red if under 15 seconds, with different messages for each.
 */
 function matchTimeUpdate(key, time, isNew) {
 	if (time < 30 && time > 15) {
-		document.getElementById("match-time").innerHTML = "Match almost over: " + time + " seconds left!";
+		document.getElementById("match-time").innerHTML = "Match almost over: " + (120 - (Math.round(time * 100) / 100)) + " seconds left!";
 		document.getElementById("matchtimerectangle").style.backgroundColor = "FFCC00";
 	} else if (time <= 15) {
-		document.getElementById("match-time").innerHTML = "Less than 15 seconds: " + time + " seconds left!";
+		document.getElementById("match-time").innerHTML = "Less than 15 seconds: " + (120 - (Math.round(time * 100) / 100)) + " seconds left!";
 		document.getElementById("matchtimerectangle").style.backgroundColor = "B20000";
 	} else {
-		document.getElementById("match-time").innerHTML = "Match time left: " + time + " seconds left";
+		document.getElementById("match-time").innerHTML = "Match time left: " + (120 - (Math.round(time * 100) / 100)) + " seconds left";
 		document.getElementById("matchtimerectangle").style.backgroundColor = "green";
 	}
 }
@@ -173,10 +173,10 @@ Displays the battery voltage. Changes color to yellow if voltage is below 7.5
 */
 function batteryUpdate(key, voltage, isNew) {
 	if (voltage < 7.5) {
-		document.getElementById("battery").innerHTML = "We might be browning out at: " + voltage + " volts.";
+		document.getElementById("battery").innerHTML = "We might be browning out at: " + (Math.round(voltage * 100) / 100) + " volts.";
 		document.getElementById("batterystatusrectangle").style.backgroundColor = "FFCC00";
 	} else {
-		document.getElementById("battery").innerHTML = "Battery voltage: " + voltage + " volts";
+		document.getElementById("battery").innerHTML = "Battery voltage: " + (Math.round(voltage * 100) / 100) + " volts";
 		document.getElementById("batterystatusrectangle").style.backgroundColor = "green";
 	}
 }
