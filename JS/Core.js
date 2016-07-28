@@ -98,7 +98,6 @@ $(document).ready(function(){
 	// sets a function that will be called when any NetworkTables key/value changes
 	NetworkTables.addGlobalListener(onValueChanged, true);
 
-<<<<<<< HEAD
 	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "match-time", matchTimeUpdate, true);
 
 	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "game-period", gamePeriodUpdate, true);
@@ -113,11 +112,15 @@ $(document).ready(function(){
 
 	NetworkTables.addKeyListener("shooterstate", updateShooterState(), true);
 
-	NetworkTables.addKeyListener("grabberstate", updateGrabberState(), true);
+	NetworkTables.addKeyListener("grabbermacrostate", updateGrabberMacroState(), true);
+
+	NetworkTables.addKeyListener("grabbermicrostate", updateGrabberMicroState(), true);
 
 	NetworkTables.addKeyListener("accumulatorstate", updateAccumulatorState(), true);
 
-	NetworkTables.addKeyListener("breacherstate", updateBreacherState(), true);
+	NetworkTables.addKeyListener("breachermacrostate", updateBreacherMacroState(), true);
+
+	NetworkTables.addKeyListener("breachermicrostate", updateBreacherMicroState(), true)
 });
 
 function updateDrivetrainState(key, value, isNew) {
@@ -130,9 +133,14 @@ function updateShooterState(key, value, isNew) {
 	unfade("shooteranimation");
 }
 
-function updateGrabberState(key, value, isNew) {
-	document.getElementById("grabberstate").innerHTML = "Grabber state: " + value;
-	unfade("grabberanimation");
+function updateGrabberMacroState(key, value, isNew) {
+	document.getElementById("grabbermacrostate").innerHTML = "Grabber macro state: " + value;
+	unfade("grabbermacroanimation");
+}
+
+function updateGrabberMicroState(key, value, isNew) {
+	document.getElementById("grabbermicrostate").innerHTML = "Grabber micro state: " + value;
+	unfade("grabbermicroanimation");
 }
 
 function updateAccumulatorState(key, value, isNew) {
@@ -140,9 +148,14 @@ function updateAccumulatorState(key, value, isNew) {
 	unfade("accumulatoranimation");
 }
 
-function updateBreacherState(key, value, isNew) {
-	document.getElementById("breacherstate").innerHTML = "Breacher state: " + value;
-	unfade("breacheranimation");
+function updateBreacherMacroState(key, value, isNew) {
+	document.getElementById("breachermacrostate").innerHTML = "Breacher macro state: " + value;
+	unfade("breachermacroanimation");
+}
+
+function updateBreacherMicroState(key, value, isNew) {
+	document.getElementById("breachermicrostate").innerHTML = "Breacher micro state: " + value;
+	unfade("breachermicroanimation");
 }
 
 function unfade(e) {

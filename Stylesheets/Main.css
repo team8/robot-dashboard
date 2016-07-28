@@ -94,13 +94,14 @@ div.debug-container {
 	border-radius: 15px;
 	position: absolute;
 	background-color: orange;
+}
 
-#drivetrainanimation {
+#drivetrainanimation{
 	width: 260px;
 	height: 30px;
 	background-color: magenta;
 	position: absolute;
-	top: 467px;
+	top: 447px;
 	left: 30px;
 	border-radius: 15px;
 }
@@ -108,19 +109,29 @@ div.debug-container {
 #shooteranimation {
 	width: 250px;
 	height: 30px;
-	background-color: orange;
+	background-color: darkorange;
 	position: absolute;
-	top: 502px;
+	top: 482px;
 	left:30px;
 	border-radius: 15px;
 }
 
-#grabberanimation {
-	width: 252px;
+#grabbermacroanimation {
+	width: 290px;
 	height: 30px;
 	background-color: yellow;
 	position: absolute;
-	top: 537px;
+	top: 517px;
+	left: 30px;
+	border-radius: 15px;
+}
+
+#grabbermicroanimation {
+	width: 290px;
+	height: 30px;
+	background-color: gold;
+	position: absolute;
+	top: 552px;
 	left: 30px;
 	border-radius: 15px;
 }
@@ -130,17 +141,27 @@ div.debug-container {
 	height: 30px;
 	background-color: silver;
 	position: absolute;
-	top: 572px;
+	top: 587px;
 	left: 30px;
 	border-radius: 15px;
 }
 
-#breacheranimation {
-	width: 258px;
+#breachermacroanimation {
+	width: 290px;
 	height: 30px;
 	background-color: pink;
 	position: absolute;
-	top: 607px;
+	top: 622px;
+	left: 30px;
+	border-radius: 15px;
+}
+
+#breachermicroanimation {
+	width: 290px;
+	height: 30px;
+	background-color: darksalmon;
+	position: absolute;
+	top: 657px;
 	left: 30px;
 	border-radius: 15px;
 }
@@ -148,36 +169,50 @@ div.debug-container {
 #drivetrainstate {
 	font-size: 20px;
 	position: absolute;
-	top: 450px;
+	top: 430px;
 	left:40px;
 }
 
 #shooterstate {
 	font-size: 20px;
 	position: absolute;
-	top: 485px;
+	top: 465px;
 	left:40px;
 }
 
-#grabberstate {
+#grabbermacrostate {
 	font-size: 20px;
 	position: absolute;
-	top: 520px;
+	top: 500px;
 	left:40px;
+}
+
+#grabbermicrostate {
+	font-size: 20px;
+	position: absolute;
+	top: 535px;
+	left: 40px;
 }
 
 #accumulatorstate {
 	font-size: 20px;
 	position: absolute;
-	top: 555px;
+	top: 570px;
 	left:40px;
 }
 
-#breacherstate {
+#breachermacrostate {
 	font-size: 20px;
 	position: absolute;
-	top: 590px;
+	top: 605px;
 	left:40px;
+}
+
+#breachermicrostate {
+	font-size: 20px;
+	position: absolute;
+	top: 640px;
+	left: 40px;
 }
 
 .a-match-object {
