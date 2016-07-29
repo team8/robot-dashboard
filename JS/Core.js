@@ -108,19 +108,19 @@ $(document).ready(function(){
 
 	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS+ "alliance", allianceUpdate, true);
 
-	NetworkTables.addKeyListener("drivetrainstate", updateDrivetrainState(), true);
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "drivetrainstate", updateDrivetrainState, true);
 
-	NetworkTables.addKeyListener("shooterstate", updateShooterState(), true);
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "shooterstate", updateShooterState, true);
 
-	NetworkTables.addKeyListener("grabbermacrostate", updateGrabberMacroState(), true);
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "grabbermacrostate", updateGrabberMacroState, true);
 
-	NetworkTables.addKeyListener("grabbermicrostate", updateGrabberMicroState(), true);
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "grabbermicrostate", updateGrabberMicroState, true);
 
-	NetworkTables.addKeyListener("accumulatorstate", updateAccumulatorState(), true);
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "accumulatorstate", updateAccumulatorState, true);
 
-	NetworkTables.addKeyListener("breachermacrostate", updateBreacherMacroState(), true);
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "breachermacrostate", updateBreacherMacroState, true);
 
-	NetworkTables.addKeyListener("breachermicrostate", updateBreacherMicroState(), true)
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "breachermicrostate", updateBreacherMicroState, true)
 });
 
 function updateDrivetrainState(key, value, isNew) {
@@ -206,13 +206,13 @@ and to red if under 15 seconds, with different messages for each.
 */
 function matchTimeUpdate(key, time, isNew) {
 	if (time < 30 && time > 15) {
-		document.getElementById("match-time").innerHTML = "Match almost over: " + (120 - (Math.round(time * 100) / 100)) + " seconds left!";
+		document.getElementById("match-time").innerHTML = "Match almost over: " + (Math.round(time * 100) / 100) + " seconds left!";
 		document.getElementById("matchtimerectangle").style.backgroundColor = "FFCC00";
 	} else if (time <= 15) {
-		document.getElementById("match-time").innerHTML = "Less than 15 seconds: " + (120 - (Math.round(time * 100) / 100)) + " seconds left!";
+		document.getElementById("match-time").innerHTML = "Less than 15 seconds: " + (Math.round(time * 100) / 100) + " seconds left!";
 		document.getElementById("matchtimerectangle").style.backgroundColor = "B20000";
 	} else {
-		document.getElementById("match-time").innerHTML = "Match time left: " + (120 - (Math.round(time * 100) / 100)) + " seconds left";
+		document.getElementById("match-time").innerHTML = "Match time left: " + (Math.round(time * 100) / 100) + " seconds left";
 		document.getElementById("matchtimerectangle").style.backgroundColor = "green";
 	}
 }
