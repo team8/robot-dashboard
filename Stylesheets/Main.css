@@ -258,15 +258,21 @@ div.debug-container {
 }
 
 .a-match-object {
-	color: #3d8e15;
-	background-color: white;
+	color: black;
 	text-align: center;
 	font-size: 15px;
 	position: absolute;
-	left: 800px;
-	width: 500px;
-	height: 250px;
+	left: 600px;
+	top: 40px;
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
+}
+
+#feedaccumulate {
+	position: absolute;
+	top: 80px;
+	left: 600px;
+	width: 640px;
+	height: 480px;
 }
 
 .a-debug-object {
