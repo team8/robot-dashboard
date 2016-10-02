@@ -36,6 +36,16 @@ div.debug-container {
 	position: fixed;
 }
 
+#gametime {
+	top:290px;
+	left:563px;
+	text-align:center;
+	color: black;
+	display:inline;
+	font-size: 120px;
+	position: absolute;
+}
+
 #robotstatusrectangle {
 	width: 300px;
 	height: 35px;
@@ -267,14 +277,6 @@ div.debug-container {
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
 }
 
-#feedaccumulate {
-	position: absolute;
-	top: 80px;
-	left: 600px;
-	width: 640px;
-	height: 480px;
-}
-
 .a-debug-object {
 	color: cyan;
 	background-color: black;
@@ -293,4 +295,28 @@ div.debug-container {
 	height: 30px;
 	/*padding-top: 10px;*/
 	cursor: pointer;
+}
+
+#usbvideoelement {
+    width: 440px;
+    height: 330px;
+    left:10px;
+    top:60px;
+    position: absolute;
+}
+
+#feedgoal {
+	width: 440px;
+	height: 330px;
+	left: 460px;
+	top:60px;
+	position: absolute;
+}
+
+#feedaccumulate {
+	width: 440px;
+	height: 330px;
+	left: 910px;
+	top:60px;
+	position: absolute;
 }

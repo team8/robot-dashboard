@@ -12,11 +12,11 @@
 		<p class="innerheader" onclick="onNavClick('debug')">Debug View</p>
 		<img id="locked" src="Images/unlocked.jpeg" onclick='updateLocked()'></img>
 	</div>
-	<!-- Not sure as to how to format this -->
-	<div class="match-container">
-		<p class="a-match-object">Playing Field</p>
-		<img id = "feedaccumulate" src = "http://i1347.photobucket.com/albums/p712/pyroflame1358/WIN_20161001_02_08_05_Pro_zpsoxs7ux6e.mp4" alt = "no accumulate stream">
-	</div>
+
+    <video autoplay="true" id="usbvideoelement"> </video>
+	<img id = "feedgoal" src = "http://10.0.8.3/mjpg/video.mjpg" alt = "no goal stream">
+	<img id = "feedaccumulate" src = "http://10.0.8.4/mjpg/video.mjpg" alt = "no accumulate stream">
+
 	<div class="debug-container">
 		<p class="a-debug-object">PID Grapher</p>
 	</div>
@@ -33,6 +33,7 @@
 		<p id="robostatus">Robot status unavailable</p>
 		<p id="networkstatus">Network status unavailable</p>
 		<p id="match-time">Match time: Not in a match</p>
+		<p id = "gametime">90</p>
 		<p id="game-period">Game Period: Not in a match</p>
 		<p id="brownout-status">Brownout status: Robot disconnected</p>
 		<p id="battery"> Battery voltage: Robot disconnected</p>
