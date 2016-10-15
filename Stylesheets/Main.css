@@ -241,14 +241,6 @@ div.debug-container {
 	background-color: orange;
 }
 
-#autochooserstatus {
-	top: 381px;
-	left: 415px;
-	font-size: 20px;
-	position: absolute;
-	opacity: 0;
-}
-
 #autochooser {
 	top: 381px;
 	left: 40px;
@@ -272,6 +264,8 @@ div.debug-container {
 	border-radius: 5px;
 	position: absolute;
 }
+
+
 
 .a-match-object {
 	color: black;

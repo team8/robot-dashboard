@@ -56,6 +56,11 @@ function onMatchElemFunc() {
 	Array.prototype.forEach.call(document.getElementsByClassName("subsystem-states"), function(element) {
 		element.style.visibility = "hidden"
 	});
+
+	Array.prototype.forEach.call(document.getElementsByClassName("debugging"), function(element) {
+		element.style.visibility = "hidden"
+	});
+
 	document.getElementById("robostatus").style.visibility = "hidden"
 	document.getElementById("networkstatus").style.visibility = "hidden"
 	document.getElementById("match-time").style.visibility = "hidden"
@@ -77,7 +82,6 @@ function onMatchElemFunc() {
 	document.getElementById("autochooser").style.top = 400
 	document.getElementById("chooser").style.top = 400
 	document.getElementById("chooserbutton").style.top = 403
-	document.getElementById("autochooserstatus").style.top = 400
 
 	document.getElementById("drivetrainanimation").style.visibility = "hidden"
 	document.getElementById("shooteranimation").style.visibility = "hidden"
@@ -110,6 +114,11 @@ function onDebugElemFunc() {
 	Array.prototype.forEach.call(document.getElementsByClassName("robot-status"), function(element) {
 		element.style.visibility = "visible"
 	});
+
+	Array.prototype.forEach.call(document.getElementsByClassName("debugging"), function(element) {
+		element.style.visibility = "visible"
+	});
+
 	document.getElementById("robostatus").style.visibility = "visible"
 	document.getElementById("networkstatus").style.visibility = "visible"
 	document.getElementById("match-time").style.visibility = "visible"
@@ -130,7 +139,6 @@ function onDebugElemFunc() {
 	document.getElementById("autochooser").style.top = 381
 	document.getElementById("chooser").style.top = 380
 	document.getElementById("chooserbutton").style.top = 383
-	document.getElementById("autochooserstatus").style.top = 381
 
 	document.getElementById("drivetrainanimation").style.visibility = "visible"
 	document.getElementById("shooteranimation").style.visibility = "visible"
@@ -200,11 +208,13 @@ $(document).ready(function(){
 
 	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "breachermicrostate", updateBreacherMicroState, true);
 
-	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "pvalue", pValueUpdate, true);
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "autopathhandshake", autoPathUpdate, true);
 
-	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "dvalue", dValueUpdate, true);
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "pvaluehandshake", pValueUpdate, true);
 
-	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "ivalue", iValueUpdate, true);
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "dvaluehandshake", dValueUpdate, true);
+
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "ivaluehandshake", iValueUpdate, true);
 });
 
 function updateDrivetrainState(key, value, isNew) {
@@ -263,10 +273,6 @@ and submits it to the networktables
 function submitAutoPath() {
 	var path = document.getElementById("chooser").value;
 	NetworkTables.putValue(NT_TABLE_ID_ADDRESS + "autopath", path);
-	document.getElementById("autonomouspath").innerHTML = "Current auto path: " + path;
-	document.getElementById("autochooserstatus").style.opacity = 1.0;
-	document.getElementById("chooserrectangle").style.backgroundColor = "green";
-	unfade("chooserrectangle");
 }
 
 function submitP() {
@@ -390,6 +396,12 @@ function gameTimeUpdate(key, time, isNew) {
 	} else {
 		document.getElementById("gametime").style.color = "blue";
 	}
+}
+
+function autoPathUpdate(key, path, isNew) {
+	document.getElementById("autonomouspath").innerHTML = "Current auto path: " + path;
+	document.getElementById("chooserrectangle").style.backgroundColor = "green";
+	unfade("chooserrectangle");
 }
 
 function pValueUpdate(key, p, isNew) {
