@@ -36,6 +36,12 @@ div.debug-container {
 	position: fixed;
 }
 
+.debugging {
+	position: absolute;
+	top: 200px;
+	left:500px;
+}
+
 #gametime {
 	top:290px;
 	left:563px;

@@ -198,7 +198,13 @@ $(document).ready(function(){
 
 	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "breachermacrostate", updateBreacherMacroState, true);
 
-	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "breachermicrostate", updateBreacherMicroState, true)
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "breachermicrostate", updateBreacherMicroState, true);
+
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "pvalue", pValueUpdate, true);
+
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "dvalue", dValueUpdate, true);
+
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "ivalue", iValueUpdate, true);
 });
 
 function updateDrivetrainState(key, value, isNew) {
@@ -261,6 +267,21 @@ function submitAutoPath() {
 	document.getElementById("autochooserstatus").style.opacity = 1.0;
 	document.getElementById("chooserrectangle").style.backgroundColor = "green";
 	unfade("chooserrectangle");
+}
+
+function submitP() {
+	var p = document.getElementById("setp").value;
+	NetworkTables.putValue(NT_TABLE_ID_ADDRESS + "pvalue", p);
+}
+
+function submitI() {
+	var i = document.getElementById("seti").value;
+	NetworkTables.putValue(NT_TABLE_ID_ADDRESS + "ivalue", i);
+}
+
+function submitD() {
+	var d = document.getElementById("setd").value;
+	NetworkTables.putValue(NT_TABLE_ID_ADDRESS + "dvalue", d);
 }
 
 /*
@@ -369,6 +390,18 @@ function gameTimeUpdate(key, time, isNew) {
 	} else {
 		document.getElementById("gametime").style.color = "blue";
 	}
+}
+
+function pValueUpdate(key, p, isNew) {
+	document.getElementById("pvalue").innerHTML = p;
+}
+
+function iValueUpdate(key, i, isNew) {
+	document.getElementById("ivalue").innerHTML = i;
+}
+
+function dValueUpdate(key, d, isNew) {
+	document.getElementById("dvalue").innerHTML = d;
 }
 
 function onValueChanged(key, value, isNew) {
