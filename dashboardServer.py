@@ -17,11 +17,22 @@ from tornado.ioloop import IOLoop
 from networktables import NetworkTable
 from pynetworktables2js import get_handlers, NonCachingStaticFileHandler
 
+import atexit
+import signal
+import os
+
 import logging
 logger = logging.getLogger('dashboard')
 
 log_datefmt = '%H:%M:%S'
 log_format = '%(asctime)s:%(msecs)03d %(levelname)-8s: %(name)-20s: %(message)s'
+
+
+
+def hard_exit():
+    os.kill(os.getpid(), signal.SIGINT)
+
+# atexit.register(hard_exit)
 
 def init_networktables(options):
 
