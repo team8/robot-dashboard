@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width="1000" height="700"
+style="border:1px solid #c3c3c3;">
+Your browser does not support the canvas element.
+</canvas>
+
+<script>
+	var canvas = document.getElementById("myCanvas");
+	var ctx = canvas.getContext("2d");
+
+	var SliderBlock = {
+		lastPosX: 450,
+		lastPosY: 200,
+	}
+
+	ctx.fillStyle = "000000"
+	ctx.fillRect(0,0,1000,700)
+
+	function update(x) {
+		console.log(x)
+		ctx.fillStyle = "000000"
+		ctx.fillRect(SliderBlock.lastPosX,SliderBlock.lastPosY,200,150);
+		ctx.fillStyle = "#FF0000";
+		ctx.fillRect(SliderBlock.lastPosX+x,SliderBlock.lastPosY,200,150);
+		SliderBlock.lastPosX = SliderBlock.lastPosX + x;
+	}
+
+	function updateLimitSwitches(left, center, right) {
+		if (left == "true") {
+			ctx.fillStyle = "00FF00"
+			ctx.fillRect(200,500, 90,90)
+		}
+		else {
+			ctx.fillStyle = "FF0000"
+			ctx.fillRect(200,500, 90,90)
+		}
+
+		if (center == "true") {
+			ctx.fillStyle = "00FF00"
+			ctx.fillRect(500,500, 90,90)
+		}
+		else {
+			ctx.fillStyle = "FF0000"
+			ctx.fillRect(500,500, 90,90)
+		}
+
+		if (right == "true") {
+			ctx.fillStyle = "00FF00"
+			ctx.fillRect(800,500, 90,90)
+		}
+		else {
+			ctx.fillStyle = "FF0000"
+			ctx.fillRect(800,500, 90,90)
+		}
+
+	}
+
+	update(0)
+	updateLimitSwitches("false","true","false")
+</script>
+
+</body>
+</html>
+
+
+                           

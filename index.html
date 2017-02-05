@@ -3,6 +3,7 @@
 	<title>FRC Team #8 Dashboard</title>
 	<script src="/networktables/networktables.js"></script>
 	<script src="JS/jquery.min.js"></script>
+	<script src="JS/canvas_manager.js"></script>
 	<script src="JS/Core.js"></script>
 	<link rel="stylesheet" type="text/css" href="Stylesheets/Main.css">
 </head>
@@ -15,48 +16,20 @@
 
     <video autoplay="true" id="usbvideoelement"> </video>
 	<img id = "feedgoal" src = "http://10.0.8.3/mjpg/video.mjpg" alt = "no goal stream">
-	<img id = "feedaccumulate" src = "http://10.0.8.4/mjpg/video.mjpg" alt = "no accumulate stream">
 
-	<div class="debug-container">
-		<p class="a-debug-object">PID Grapher</p>
-	</div>
+	<canvas id="myCanvas" width="350" height="350"></canvas>
 
-	<div id="robotstatusrectangle"></div>
-	<div id="networkstatusrectangle"></div>
-	<div id="matchtimerectangle"></div>
-	<div id="gameperiodrectangle"></div>
-	<div id="brownoutstatusrectangle"></div>
-	<div id="batterystatusrectangle"></div>
-	<div id="chooserrectangle"></div>
-
-	<div class="robot-status"> 
+	<div class="robot-status debug-container"> 
 		<p id="robostatus">Robot status unavailable</p>
 		<p id="networkstatus">Network status unavailable</p>
-		<p id="match-time">Match time: Not in a match</p>
-		<p id = "gametime">90</p>
-		<p id="game-period">Game Period: Not in a match</p>
-		<p id="brownout-status">Brownout status: Robot disconnected</p>
-		<p id="battery"> Battery voltage: Robot disconnected</p>
-		<p id="autonomouspath">Current auto path: None</p>
+		<p id="match-time" class="orange-at-start">Match time: Not in a match</p>
+		<p id="gametime">90</p>
+		<p id="game-period" class="orange-at-start">Game Period: Not in a match</p>
+		<p id="brownout-status" class="orange-at-start">Brownout status: Robot disconnected</p>
+		<p id="battery" class="orange-at-start"> Battery voltage: Robot disconnected</p>
+		<p id="autonomouspath" class="orange-at-start">Current auto path: None</p>
 	</div>
 
-	<div id="drivetrainanimation"></div>
-	<div id="shooteranimation"></div>
-	<div id="grabbermacroanimation"></div>
-	<div id="grabbermicroanimation"></div>
-	<div id="accumulatoranimation"></div>
-	<div id="breachermacroanimation"></div>
-	<div id="breachermicroanimation"></div>
-
-	<div class="subsystem-states">
-		<p id="drivetrainstate"></p>
-		<p id="shooterstate"></p>
-		<p id="grabbermacrostate"></p>
-		<p id="grabbermicrostate"></p>
-		<p id="accumulatorstate"></p>
-		<p id="breachermacrostate"></p>
-		<p id="breachermicrostate"></p>
-	</div>
 	
 	<form>
 		<label for="chooser" id="autochooser"> Auto mode chooser: </label>

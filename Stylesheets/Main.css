@@ -30,10 +30,21 @@ div.debug-container {
 	visibility: "";
 }
 
+.orange-at-start {
+	background-color: orange;
+}
+
 .robot-status {
 	font-size: 20px;
 	margin-left: 50px;
 	position: fixed;
+}
+
+div.robot-status > p {
+	display: inline-block; 
+	padding: 5px;
+	display: table;
+	border-radius: 10px;
 }
 
 #gametime {
@@ -44,196 +55,10 @@ div.debug-container {
 	display:inline;
 	font-size: 120px;
 	position: absolute;
-}
-
-#robotstatusrectangle {
-	width: 300px;
-	height: 35px;
-	top: 65px;
-	left: 40px;
-	border-radius: 15px;
-	position: absolute;
-	background-color: orange;
-}
-
-#networkstatusrectangle {
-	width: 320px;
-	height: 35px;
-	top: 109px;
-	left: 40px;
-	border-radius: 15px;
-	position: absolute;
-	background-color: orange;
-}
-
-#matchtimerectangle {
-	width: 325px;
-	height: 35px;
-	top: 154px;
-	left: 40px;
-	border-radius: 15px;
-	position: absolute;
-	background-color: orange;
-}
-
-#gameperiodrectangle {
-	width: 275px;
-	height: 35px;
-	top: 197px;
-	left: 40px;
-	border-radius: 15px;
-	position: absolute;
-	background-color: orange;
-}
-
-#brownoutstatusrectangle {
-	width: 250px;
-	height: 35px;
-	top: 242px;
-	left: 40px;
-	border-radius: 15px;
-	position: absolute;
-	background-color: orange;
-}
-
-#batterystatusrectangle {
-	width: 325px;
-	height: 35px;
-	top: 286px;
-	left: 40px;
-	border-radius: 15px;
-	position: absolute;
-	background-color: orange;
-}
-
-#drivetrainanimation{
-	width: 260px;
-	height: 30px;
-	background-color: magenta;
-	position: absolute;
-	top: 447px;
-	left: 30px;
 	border-radius: 15px;
 }
 
-#shooteranimation {
-	width: 250px;
-	height: 30px;
-	background-color: darkorange;
-	position: absolute;
-	top: 482px;
-	left:30px;
-	border-radius: 15px;
-}
 
-#grabbermacroanimation {
-	width: 290px;
-	height: 30px;
-	background-color: yellow;
-	position: absolute;
-	top: 517px;
-	left: 30px;
-	border-radius: 15px;
-}
-
-#grabbermicroanimation {
-	width: 290px;
-	height: 30px;
-	background-color: gold;
-	position: absolute;
-	top: 552px;
-	left: 30px;
-	border-radius: 15px;
-}
-
-#accumulatoranimation {
-	width: 277px;
-	height: 30px;
-	background-color: silver;
-	position: absolute;
-	top: 587px;
-	left: 30px;
-	border-radius: 15px;
-}
-
-#breachermacroanimation {
-	width: 290px;
-	height: 30px;
-	background-color: pink;
-	position: absolute;
-	top: 622px;
-	left: 30px;
-	border-radius: 15px;
-}
-
-#breachermicroanimation {
-	width: 340px;
-	height: 30px;
-	background-color: darksalmon;
-	position: absolute;
-	top: 657px;
-	left: 30px;
-	border-radius: 15px;
-}
-
-#drivetrainstate {
-	font-size: 20px;
-	position: absolute;
-	top: 430px;
-	left:40px;
-}
-
-#shooterstate {
-	font-size: 20px;
-	position: absolute;
-	top: 465px;
-	left:40px;
-}
-
-#grabbermacrostate {
-	font-size: 20px;
-	position: absolute;
-	top: 500px;
-	left:40px;
-}
-
-#grabbermicrostate {
-	font-size: 20px;
-	position: absolute;
-	top: 535px;
-	left: 40px;
-}
-
-#accumulatorstate {
-	font-size: 20px;
-	position: absolute;
-	top: 570px;
-	left:40px;
-}
-
-#breachermacrostate {
-	font-size: 20px;
-	position: absolute;
-	top: 605px;
-	left:40px;
-}
-
-#breachermicrostate {
-	font-size: 20px;
-	position: absolute;
-	top: 640px;
-	left: 40px;
-}
-
-#chooserrectangle {
-	width: 325px;
-	height: 35px;
-	top: 328px;
-	left: 40px;
-	border-radius: 15px;
-	position: absolute;
-	background-color: orange;
-}
 
 #autochooserstatus {
 	top: 381px;
@@ -241,6 +66,8 @@ div.debug-container {
 	font-size: 20px;
 	position: absolute;
 	opacity: 0;
+	border-radius: 15px;
+	background-color: orange;
 }
 
 #autochooser {
@@ -305,18 +132,19 @@ div.debug-container {
     position: absolute;
 }
 
+#myCanvas {
+	border:1px solid #c3c3c3;
+	width: 350px;
+	height: 350px;
+	left:910px;
+	top: 60px;
+	position: absolute;
+}
+
 #feedgoal {
 	width: 440px;
 	height: 330px;
 	left: 460px;
-	top:60px;
-	position: absolute;
-}
-
-#feedaccumulate {
-	width: 440px;
-	height: 330px;
-	left: 910px;
 	top:60px;
 	position: absolute;
 }
