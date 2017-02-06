@@ -57,11 +57,6 @@ function onMatchElemFunc() {
 		element.style.visibility = "hidden"
 	});
 
-	document.getElementById("autochooser").style.top = 400
-	document.getElementById("chooser").style.top = 400
-	document.getElementById("chooserbutton").style.top = 403
-	document.getElementById("autochooserstatus").style.top = 400
-
 	document.getElementById("usbvideoelement").style.visibility = "visible"
 	document.getElementById("feedgoal").style.visibility = "visible"
 }
@@ -85,10 +80,6 @@ function onDebugElemFunc() {
 		element.style.visibility = "visible"
 	});
 
-	document.getElementById("autochooser").style.top = 450
-	document.getElementById("chooser").style.top = 450
-	document.getElementById("chooserbutton").style.top = 450
-	document.getElementById("autochooserstatus").style.top = 450
 
 	document.getElementById("usbvideoelement").style.visibility = "hidden"
 	document.getElementById("feedgoal").style.visibility = "hidden"
@@ -136,18 +127,6 @@ $(document).ready(function(){
 	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS+ "alliance", allianceUpdate, true);
 });
 
-/*
-Retrieves the entered autonomous path from the input form
-and submits it to the networktables 
-*/
-function submitAutoPath() {
-	var path = document.getElementById("chooser").value;
-	NetworkTables.putValue(NT_TABLE_ID_ADDRESS + "autopath", path);
-	document.getElementById("autonomouspath").innerHTML = "Current auto path: " + path;
-	document.getElementById("autonomouspath").style.opacity = 1.0;
-	document.getElementById("autonomouspath").style.backgroundColor = "green";
-	unfade("chooserrectangle");
-}
 
 /*
 NetworkTable functions.
