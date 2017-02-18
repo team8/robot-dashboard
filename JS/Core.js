@@ -105,7 +105,6 @@ $(document).ready(function(){
 	setElementStatus()
 	updateLocked()
 	onMatchElemFunc()
-	handleUSBVideo()
 	//onRobotConnection(true)
 	// sets a function that will be called when the websocket connects/disconnects
 	NetworkTables.addWsConnectionListener(onNetworkTablesConnection, true);
@@ -124,7 +123,26 @@ $(document).ready(function(){
 
 	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "battery", batteryUpdate, true);
 
-	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS+ "alliance", allianceUpdate, true);
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "alliance", allianceUpdate, true);
+
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "scalercurrent", scalerCurrent, true)
+
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "scalerspeed", scalerSpeed, true)	
+
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "intakestatus", intakeStatus, true)
+
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "spatulastatus", spatulaStatus, true)
+
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "flipperstatus", flipperStatus, true)
+
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "leftdriveencoder", leftDriveEncoder, true)
+
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "rightdriveencoder", rightDriveEncoder, true)
+
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "sliderencoder", sliderEncoder, true)
+
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "sliderpotentiometer", sliderPotentiometer, true)
+
 });
 
 
@@ -134,11 +152,11 @@ NetworkTable functions.
 function onRobotConnection(connected) {
 	if (connected) {
 		document.getElementById("robostatus").innerHTML = "Robot status: CONNECTED";
-		document.getElementById("robostatus").style.backgroundColor = "green";
+		document.getElementById("robostatus").style.backgroundColor = "#27ae60";
 	} 
 	else {
 		document.getElementById("robostatus").innerHTML = "Robot status: DISCONNECTED";
-		document.getElementById("robostatus").style.backgroundColor = "red";
+		document.getElementById("robostatus").style.backgroundColor = "#e74c3c";
 	}
 }
 
@@ -150,10 +168,10 @@ function onNetworkTablesConnection(connected) {
 	console.log(connected)
 	if (connected) {
 		document.getElementById("networkstatus").innerHTML = "Network status: CONNECTED";
-		document.getElementById("networkstatus").style.backgroundColor = "green";
+		document.getElementById("networkstatus").style.backgroundColor = "27ae60";
 	} else {
 		document.getElementById("networkstatus").innerHTML = "Network status: DISCONNECTED";
-		document.getElementById("networkstatus").style.backgroundColor = "red";
+		document.getElementById("networkstatus").style.backgroundColor = "e74c3c";
 	}
 }
 
@@ -164,13 +182,13 @@ and to red if under 15 seconds, with different messages for each.
 function matchTimeUpdate(key, time, isNew) {
 	if (Math.round(time) < 30 && Math.round(time) > 15) {
 		document.getElementById("match-time").innerHTML = "Match almost over: " + Math.round(time) + " seconds left!";
-		document.getElementById("match-time").style.backgroundColor = "yellow";
+		document.getElementById("match-time").style.backgroundColor = "f1c40f";
 	} else if (Math.round(time) <= 15) {
 		document.getElementById("match-time").innerHTML = "Less than 15 seconds: " + Math.round(time) + " seconds left!";
-		document.getElementById("match-time").style.backgroundColor = "red";
+		document.getElementById("match-time").style.backgroundColor = "e74c3c";
 	} else {
 		document.getElementById("match-time").innerHTML = "Match time left: " + Math.round(time) + " seconds left";
-		document.getElementById("match-time").style.backgroundColor = "blue";
+		document.getElementById("match-time").style.backgroundColor = "3498db";
 	}
 }
 
@@ -184,7 +202,7 @@ function gamePeriodUpdate(key, period, isNew) {
 		document.getElementById("game-period").style.backgroundColor = "B20000";
 	} else {
 		document.getElementById("game-period").innerHTML = "Game period: " + period;
-		document.getElementById("game-period").style.backgroundColor = "green";
+		document.getElementById("game-period").style.backgroundColor = "27ae60";
 	}
 }
 
@@ -197,7 +215,7 @@ function batteryUpdate(key, voltage, isNew) {
 		document.getElementById("battery").style.backgroundColor = "FFCC00";
 	} else {
 		document.getElementById("battery").innerHTML = "Battery voltage: " + (Math.round(voltage * 100) / 100) + " volts";
-		document.getElementById("battery").style.backgroundColor = "green";
+		document.getElementById("battery").style.backgroundColor = "27ae60";
 	}
 }
 
@@ -211,7 +229,7 @@ function brownoutUpdate(key, status, isNew) { //True for browning out, false if 
 		document.getElementById("brownout-status").style.backgroundColor = "B20000";
 	} else {
 		document.getElementById("brownout-status").innerHTML = "Not browning out now.";
-		document.getElementById("brownout-status").style.backgroundColor = "green";
+		document.getElementById("brownout-status").style.backgroundColor = "27ae60";
 	}
 }
 
@@ -220,41 +238,68 @@ Displays what alliance we are on by coloring in the menu bar at the top.
 */
 function allianceUpdate(key, alliance, isNew) {
 	if (alliance == "red") {
-		document.getElementById("header").style.backgroundColor = "red";
-	} else if (alliance == "blue") {
-		document.getElementById("header").style.backgroundColor = "blue";
+		document.getElementById("header").style.backgroundColor = "e74c3c";
+	} else if (alliance == "3498db") {
+		document.getElementById("header").style.backgroundColor = "3498db";
 	}
 }
 
 function gameTimeUpdate(key, time, isNew) {
 	document.getElementById("gametime").innerHTML = Math.round(time);
 	if (Math.round(time) < 30 && Math.round(time) > 15) {
-		document.getElementById("gametime").style.color = "yellow";
+		document.getElementById("gametime").style.color = "f1c40f";
 	} else if (Math.round(time) <= 15) {
-		document.getElementById("gametime").style.color = "red";
+		document.getElementById("gametime").style.color = "e74c3c";
 	} else {
-		document.getElementById("gametime").style.color = "blue";
+		document.getElementById("gametime").style.color = "3498db";
 	}
+}
+
+function driveSpeedUpdate(key, value, isNew) {
+	payload = value.split(",")
+	document.getElementsById("drivetrain-speed").innerHTML = "Left Speed: " + value[0] + "<br> Right Speed: " + value[1]
+}
+
+function scalerCurrent(key, value, isNew) {
+	document.getElementsById("scaler-current").innerHTML = "Scalar Current: " + value
+}
+
+function scalarSpeed(key, value, isNew) {
+	document.getElementsById("scaler-speed").innerHTML = "Scalar Speed: " + value
+}
+
+function intakeStatus(key, value, isNew) {
+	document.getElementsById("intake-status").innerHTML = "Intake Status: " + value
+}
+
+function spatulaStatus(key, value, isNew) {
+	document.getElementsById("spatula-status").innerHTML = "Spatula Status: " + value
+}
+
+function flipperStatus(key, value, isNew) {
+	document.getElementsById("flipper-status").innerHTML = "Flipper Status: " + value
+}
+
+function leftDriveEncoder(key, value, isNew) {
+	document.getElementsById("drive-encoder-left").innerHTML = "Left Drive Encoder: " + value
+}
+
+function rightDriveEncoder(key, value, isNew) {
+	document.getElementsById("drive-encoder-right").innerHTML = "Right Drive Encoder: " + value
+}
+
+function sliderEncoder(key, value, isNew) {
+	document.getElementsById("slider-encoder").innerHTML = "Right Drive Encoder: " + value
+}
+
+function sliderPotentiometer(key, value, isNew) {
+	document.getElementsById("slider-potentiometer").innerHTML = "Slider Potentiometer: " + value
+}
+
+function climberEncoder(key, value, isNew) {
+	document.getElementsById("climber-encoder").innerHTML = "Climber Encoder: " + value
 }
 
 function onValueChanged(key, value, isNew) {
 	console.log(key + ": " + value)
-}
-
-function handleUSBVideo() {
-	var video = document.querySelector("#usbvideoelement");
- 
-	navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
- 
-	if (navigator.getUserMedia) {       
-    	navigator.getUserMedia({video: true}, handleVideo, videoError);
-	}
- 
-	function handleVideo(stream) {
-    	video.src = window.URL.createObjectURL(stream);
-	}
- 
-	function videoError(e) {
-    	// do something
-	}
 }

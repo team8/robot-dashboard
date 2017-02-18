@@ -19,13 +19,39 @@
 
 	<canvas id="myCanvas" width="350" height="350"></canvas>
 
+	<div class="match-container">
+		<p id="drivetrain-speed"> Left Speed: UNSET <br> Right Speed: UNSET</p>
+	</div>
+	
 	<div class="robot-status debug-container"> 
-		<p id="robostatus">Robot status unavailable</p>
+		<!--  Full Robot State  -->
+		<p id="robostatus" class="red-at-start">Robot status unavailable</p>
 		<p id="networkstatus">Network status unavailable</p>
-		<p id="match-time" class="orange-at-start">Match time: Not in a match</p>
-		<p id="game-period" class="orange-at-start">Game Period: Not in a match</p>
-		<p id="brownout-status" class="orange-at-start">Brownout status: Robot disconnected</p>
-		<p id="battery" class="orange-at-start"> Battery voltage: Robot disconnected</p>
+		<p id="match-time" class="yellow-at-start">Match time: Not in a match</p>
+		<p id="game-period" class="yellow-at-start">Game Period: Not in a match</p>
+		<p id="brownout-status" class="yellow-at-start">Brownout status: Robot disconnected</p>
+		<p id="battery" class="yellow-at-start"> Battery voltage: Robot disconnected</p>	
+	</div>
+
+	<div class="subsystem-status debug-container">
+		<!-- Specific Subsystems -->
+		<p id="scaler-current" class="red-at-start">Scaler Current: Unset </p>
+		<p id="scaler-speed" class="red-at-start">Scaler State: Unset </p>
+
+		<p id="intake-status" class="blue-at-start">Intake Status: Unset</p>
+		<p id="spatula-status" class="blue-at-start">Spatula Status: Unset</p> 
+
+		<p id="flipper-status" class="dark-at-start">Flipper Status: Unset</p>
+	</div>
+
+	<div class="sensor-status debug-container">
+		<p id="drive-encoder-left" class="blue-at-start">Left Drive Encoder: Unset</p>		
+		<p id="drive-encoder-right" class="blue-at-start">Right Drive Encoder: Unset</p>
+
+		<p id="slider-encoder" class="blue-at-start">Slider Encoder: Unset</p>
+		<p id="slider-potentiometer" class="blue-at-start">Slider Potentiometer: Unset</p>
+
+		<p id="climber-encoder" class="blue-at-start">Climber Encoder: Unset</p>
 	</div>
 
 	<p id="gametime">90</p>	
