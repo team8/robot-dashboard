@@ -31,7 +31,7 @@ function update(absolute, color) {
 
 	// Move the block over
 	ctx.fillStyle = "000000"
-	ctx.fillRect(SliderBlock.lastPosX,SliderBlock.lastPosY,100,100);
+	ctx.fillRect(SliderBlock.lastPosX-1,SliderBlock.lastPosY,101,100);
 	ctx.fillStyle = color=="red" ? "#e74c3c" : "#27ae60";
 	ctx.fillRect(absolute,SliderBlock.lastPosY,100,100);
 	SliderBlock.lastPosX = absolute
@@ -56,6 +56,6 @@ function updateSpeedAndPosition(speed, position) {
 	ctx.fillRect(0,0,350,75)
 	ctx.fillStyle = "27ae60"
 	ctx.font = "20px Arial";
-	text = "SPEED: " + speed + " POSITION: " + position
-	ctx.fillText(text,20,50);
+	text = speed + " | " + position
+	ctx.fillText(text,115,50);
 }

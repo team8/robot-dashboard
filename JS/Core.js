@@ -127,8 +127,6 @@ $(document).ready(function(){
 
 	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "scalercurrent", scalerCurrent, true)
 
-	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "scalerspeed", scalerSpeed, true)	
-
 	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "intakestatus", intakeStatus, true)
 
 	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "spatulastatus", spatulaStatus, true)
@@ -141,9 +139,13 @@ $(document).ready(function(){
 
 	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "sliderencoder", sliderEncoder, true)
 
-	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "sliderpotentiometer", sliderPotentiometer, true)
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "slider-pot", sliderPotentiometer, true)
 
-	NetworkTable.addKeyListener(NT_TABLE_ID_ADDRESS + "driveSpeedUpdate", driveSpeedUpdate, true)
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "driveSpeedUpdate", drivespeedupdate, true)
+
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "sliderDistance", updateSlider, true)
+
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "speed-pos", speedAndPos, true)
 });
 
 
@@ -151,6 +153,7 @@ $(document).ready(function(){
 NetworkTable functions.
 */
 function onRobotConnection(connected) {
+	console.log("CONNECTED" + connected)
 	if (connected) {
 		document.getElementById("robostatus").innerHTML = "Robot status: CONNECTED";
 		document.getElementById("robostatus").style.backgroundColor = "#27ae60";
@@ -256,62 +259,70 @@ function gameTimeUpdate(key, time, isNew) {
 	}
 }
 
-function driveSpeedUpdate(key, value, isNew) {
+function drivespeedupdate(key, value, isNew) {
+	console.log("RECEIVED")
 	payload = value.split(",")
-	document.getElementsById("drivetrain-speed").innerHTML = "Left Speed: " + value[0] + "<br> Right Speed: " + value[1]
+	document.getElementById("drivetrain-speed").innerHTML = "Left Speed: " + payload[0] + "<br> Right Speed: " + payload[1]
 }
 
 function scalerCurrent(key, value, isNew) {
-	document.getElementsById("scaler-current").innerHTML = "Scalar Current: " + value
+	document.getElementById("scaler-current").innerHTML = "Scalar Current: " + value
 }
 
 function scalarSpeed(key, value, isNew) {
-	document.getElementsById("scaler-speed").innerHTML = "Scalar Speed: " + value
+	document.getElementById("scaler-speed").innerHTML = "Scalar Speed: " + value
 }
 
 function intakeStatus(key, value, isNew) {
-	document.getElementsById("intake-status").innerHTML = "Intake Status: " + value
+	document.getElementById("intake-status").innerHTML = "Intake Status: " + value
 }
 
 function spatulaStatus(key, value, isNew) {
-	document.getElementsById("spatula-status").innerHTML = "Spatula Status: " + value
+	document.getElementById("spatula-status").innerHTML = "Spatula Status: " + value
 }
 
 function flipperStatus(key, value, isNew) {
-	document.getElementsById("flipper-status").innerHTML = "Flipper Status: " + value
+	document.getElementById("flipper-status").innerHTML = "Flipper Status: " + value
 }
 
 function leftDriveEncoder(key, value, isNew) {
-	document.getElementsById("drive-encoder-left").innerHTML = "Left Drive Encoder: " + value
+	document.getElementById("drive-encoder-left").innerHTML = "Left Drive Encoder: " + value
 }
 
 function rightDriveEncoder(key, value, isNew) {
-	document.getElementsById("drive-encoder-right").innerHTML = "Right Drive Encoder: " + value
+	document.getElementById("drive-encoder-right").innerHTML = "Right Drive Encoder: " + value
 }
 
 function sliderEncoder(key, value, isNew) {
-	document.getElementsById("slider-encoder").innerHTML = "Right Drive Encoder: " + value
+	document.getElementById("slider-encoder").innerHTML = "Right Drive Encoder: " + value
 }
 
 function sliderPotentiometer(key, value, isNew) {
-	document.getElementsById("slider-potentiometer").innerHTML = "Slider Potentiometer: " + value
+	document.getElementById("slider-potentiometer").innerHTML = "Slider Potentiometer: " + value
 }
 
 function climberEncoder(key, value, isNew) {
-	document.getElementsById("climber-encoder").innerHTML = "Climber Encoder: " + value
+	document.getElementById("climber-encoder").innerHTML = "Climber Encoder: " + value
 }
 
 function updateSlider(key, value, isNew) {
+	// -1.580078125 
 	// Value is in inches.
 	// Min value is 4 (0 + 8"/2)
 	// Max Value is 18 (22 - 8"/2)
-	const tolerance = .125 // 1/8 of an inch tolerance
+	const tolerance = .042 // 1/8 of an inch tolerance
+	console.log(value)
+	newPos = 10 + (parseFloat(value)+1.6) * 230 / 3.2
 
-	newPos = 10 + (parseInt(value)-4) * 230 / 14
+	update(newPos, Math.abs(parseFloat(value)) > tolerance ? "red" : "green")
+}
 
-	update(newPos, Math.abs(parseInt(value)-11) > tolerance ? "red" : "green") 
+
+function speedAndPos(key, value, isNew) {
+	payload = value.split(",")
+	updateSpeedAndPosition(parseFloat(payload[0]).toFixed(3), parseFloat(payload[1]).toFixed(3))
 }
 
 function onValueChanged(key, value, isNew) {
-	console.log(key + ": " + value)
+	// console.log(key + ": " + value)
 }
