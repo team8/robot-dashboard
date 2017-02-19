@@ -143,6 +143,7 @@ $(document).ready(function(){
 
 	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "sliderpotentiometer", sliderPotentiometer, true)
 
+	NetworkTable.addKeyListener(NT_TABLE_ID_ADDRESS + "driveSpeedUpdate", driveSpeedUpdate, true)
 });
 
 
@@ -298,6 +299,17 @@ function sliderPotentiometer(key, value, isNew) {
 
 function climberEncoder(key, value, isNew) {
 	document.getElementsById("climber-encoder").innerHTML = "Climber Encoder: " + value
+}
+
+function updateSlider(key, value, isNew) {
+	// Value is in inches.
+	// Min value is 4 (0 + 8"/2)
+	// Max Value is 18 (22 - 8"/2)
+	const tolerance = .125 // 1/8 of an inch tolerance
+
+	newPos = 10 + (parseInt(value)-4) * 230 / 14
+
+	update(newPos, Math.abs(parseInt(value)-11) > tolerance ? "red" : "green") 
 }
 
 function onValueChanged(key, value, isNew) {

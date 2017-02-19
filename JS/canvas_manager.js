@@ -16,13 +16,13 @@ $(document).ready(function(){
 	ctx.fillStyle = "000000"
 	ctx.fillRect(0,0,350,350)
 
-	update(0, "red")
+	update(10, "red")
 	updatePotentiometerStatus(true)
 	updateSpeedAndPosition("Unset", "Unset")
 })
 
 
-function update(x, color) {
+function update(absolute, color) {
 	// Repaint all the lines
 	ctx.fillStyle = "FFFFFF"
 	ctx.fillRect(8,75,2,215)
@@ -33,8 +33,8 @@ function update(x, color) {
 	ctx.fillStyle = "000000"
 	ctx.fillRect(SliderBlock.lastPosX,SliderBlock.lastPosY,100,100);
 	ctx.fillStyle = color=="red" ? "#e74c3c" : "#27ae60";
-	ctx.fillRect(SliderBlock.lastPosX+x,SliderBlock.lastPosY,100,100);
-	SliderBlock.lastPosX = SliderBlock.lastPosX + x;
+	ctx.fillRect(absolute,SliderBlock.lastPosY,100,100);
+	SliderBlock.lastPosX = absolute
 
 	ctx.fillStyle = "FFFFFF"	
 	ctx.fillRect(SliderBlock.lastPosX + 49, SliderBlock.lastPosY,2,100)
