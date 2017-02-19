@@ -125,9 +125,7 @@ $(document).ready(function(){
 
 	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "alliance", allianceUpdate, true);
 
-	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "scalercurrent", scalerCurrent, true)
-
-	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "scalerspeed", scalerSpeed, true)	
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "climbercurrent", climberCurrent, true)
 
 	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "intakestatus", intakeStatus, true)
 
@@ -141,9 +139,15 @@ $(document).ready(function(){
 
 	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "sliderencoder", sliderEncoder, true)
 
-	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "sliderpotentiometer", sliderPotentiometer, true)
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "slider-pot", sliderPotentiometer, true)
 
-	NetworkTable.addKeyListener(NT_TABLE_ID_ADDRESS + "driveSpeedUpdate", driveSpeedUpdate, true)
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "driveSpeedUpdate", drivespeedupdate, true)
+
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "sliderDistance", updateSlider, true)
+
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "speed-pos", speedAndPos, true)
+
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "climberencoder", climberEncoder, true)
 });
 
 
@@ -151,6 +155,7 @@ $(document).ready(function(){
 NetworkTable functions.
 */
 function onRobotConnection(connected) {
+	console.log("CONNECTED" + connected)
 	if (connected) {
 		document.getElementById("robostatus").innerHTML = "Robot status: CONNECTED";
 		document.getElementById("robostatus").style.backgroundColor = "#27ae60";
@@ -169,10 +174,10 @@ function onNetworkTablesConnection(connected) {
 	console.log(connected)
 	if (connected) {
 		document.getElementById("networkstatus").innerHTML = "Network status: CONNECTED";
-		document.getElementById("networkstatus").style.backgroundColor = "27ae60";
+		document.getElementById("networkstatus").style.backgroundColor = "#27ae60";
 	} else {
 		document.getElementById("networkstatus").innerHTML = "Network status: DISCONNECTED";
-		document.getElementById("networkstatus").style.backgroundColor = "e74c3c";
+		document.getElementById("networkstatus").style.backgroundColor = "#e74c3c";
 	}
 }
 
@@ -183,13 +188,13 @@ and to red if under 15 seconds, with different messages for each.
 function matchTimeUpdate(key, time, isNew) {
 	if (Math.round(time) < 30 && Math.round(time) > 15) {
 		document.getElementById("match-time").innerHTML = "Match almost over: " + Math.round(time) + " seconds left!";
-		document.getElementById("match-time").style.backgroundColor = "f1c40f";
+		document.getElementById("match-time").style.backgroundColor = "#f1c40f";
 	} else if (Math.round(time) <= 15) {
 		document.getElementById("match-time").innerHTML = "Less than 15 seconds: " + Math.round(time) + " seconds left!";
-		document.getElementById("match-time").style.backgroundColor = "e74c3c";
+		document.getElementById("match-time").style.backgroundColor = "#e74c3c";
 	} else {
 		document.getElementById("match-time").innerHTML = "Match time left: " + Math.round(time) + " seconds left";
-		document.getElementById("match-time").style.backgroundColor = "3498db";
+		document.getElementById("match-time").style.backgroundColor = "#3498db";
 	}
 }
 
@@ -200,10 +205,10 @@ otherwise remains black.
 function gamePeriodUpdate(key, period, isNew) {
 	if (period == "DISABLED") {
 		document.getElementById("game-period").innerHTML = "Game period: " + period;
-		document.getElementById("game-period").style.backgroundColor = "B20000";
+		document.getElementById("game-period").style.backgroundColor = "#B20000";
 	} else {
 		document.getElementById("game-period").innerHTML = "Game period: " + period;
-		document.getElementById("game-period").style.backgroundColor = "27ae60";
+		document.getElementById("game-period").style.backgroundColor = "#27ae60";
 	}
 }
 
@@ -213,10 +218,10 @@ Displays the battery voltage. Changes color to yellow if voltage is below 7.5
 function batteryUpdate(key, voltage, isNew) {
 	if (voltage < 7.5) {
 		document.getElementById("battery").innerHTML = "We might be browning out at: " + (Math.round(voltage * 100) / 100) + " volts.";
-		document.getElementById("battery").style.backgroundColor = "FFCC00";
+		document.getElementById("battery").style.backgroundColor = "#FFCC00";
 	} else {
 		document.getElementById("battery").innerHTML = "Battery voltage: " + (Math.round(voltage * 100) / 100) + " volts";
-		document.getElementById("battery").style.backgroundColor = "27ae60";
+		document.getElementById("battery").style.backgroundColor = "#27ae60";
 	}
 }
 
@@ -227,10 +232,10 @@ red with a different message
 function brownoutUpdate(key, status, isNew) { //True for browning out, false if we are good on battery
 	if (status) {
 		document.getElementById("brownout-status").innerHTML = "We are browning out!";
-		document.getElementById("brownout-status").style.backgroundColor = "B20000";
+		document.getElementById("brownout-status").style.backgroundColor = "#B20000";
 	} else {
 		document.getElementById("brownout-status").innerHTML = "Not browning out now.";
-		document.getElementById("brownout-status").style.backgroundColor = "27ae60";
+		document.getElementById("brownout-status").style.backgroundColor = "#27ae60";
 	}
 }
 
@@ -239,77 +244,89 @@ Displays what alliance we are on by coloring in the menu bar at the top.
 */
 function allianceUpdate(key, alliance, isNew) {
 	if (alliance == "red") {
-		document.getElementById("header").style.backgroundColor = "e74c3c";
+		document.getElementById("header").style.backgroundColor = "#e74c3c";
 	} else if (alliance == "3498db") {
-		document.getElementById("header").style.backgroundColor = "3498db";
+		document.getElementById("header").style.backgroundColor = "#3498db";
 	}
 }
 
 function gameTimeUpdate(key, time, isNew) {
 	document.getElementById("gametime").innerHTML = Math.round(time);
 	if (Math.round(time) < 30 && Math.round(time) > 15) {
-		document.getElementById("gametime").style.color = "f1c40f";
+		document.getElementById("gametime").style.color = "#f1c40f";
 	} else if (Math.round(time) <= 15) {
-		document.getElementById("gametime").style.color = "e74c3c";
+		document.getElementById("gametime").style.color = "#e74c3c";
 	} else {
-		document.getElementById("gametime").style.color = "3498db";
+		document.getElementById("gametime").style.color = "#3498db";
 	}
 }
 
-function driveSpeedUpdate(key, value, isNew) {
+function drivespeedupdate(key, value, isNew) {
+	console.log("RECEIVED")
 	payload = value.split(",")
-	document.getElementsById("drivetrain-speed").innerHTML = "Left Speed: " + value[0] + "<br> Right Speed: " + value[1]
+	document.getElementById("drivetrain-speed").innerHTML = "Left Speed: " + payload[0] + "<br> Right Speed: " + payload[1]
 }
 
-function scalerCurrent(key, value, isNew) {
-	document.getElementsById("scaler-current").innerHTML = "Scalar Current: " + value
+function climberCurrent(key, value, isNew) {
+	document.getElementById("climber-current").innerHTML = "Climber Current: " + value
 }
 
-function scalarSpeed(key, value, isNew) {
-	document.getElementsById("scaler-speed").innerHTML = "Scalar Speed: " + value
+function climberSpeed(key, value, isNew) {
+	document.getElementById("climber-speed").innerHTML = "Climber Speed: " + value
 }
 
 function intakeStatus(key, value, isNew) {
-	document.getElementsById("intake-status").innerHTML = "Intake Status: " + value
+	document.getElementById("intake-status").innerHTML = "Intake Status: " + value
 }
 
 function spatulaStatus(key, value, isNew) {
-	document.getElementsById("spatula-status").innerHTML = "Spatula Status: " + value
+	document.getElementById("spatula-status").innerHTML = "Spatula Status: " + value
 }
 
 function flipperStatus(key, value, isNew) {
-	document.getElementsById("flipper-status").innerHTML = "Flipper Status: " + value
+	document.getElementById("flipper-status").innerHTML = "Flipper Status: " + value
 }
 
 function leftDriveEncoder(key, value, isNew) {
-	document.getElementsById("drive-encoder-left").innerHTML = "Left Drive Encoder: " + value
+	document.getElementById("drive-encoder-left").innerHTML = "Left Drive Encoder: " + value
 }
 
 function rightDriveEncoder(key, value, isNew) {
-	document.getElementsById("drive-encoder-right").innerHTML = "Right Drive Encoder: " + value
+	document.getElementById("drive-encoder-right").innerHTML = "Right Drive Encoder: " + value
 }
 
 function sliderEncoder(key, value, isNew) {
-	document.getElementsById("slider-encoder").innerHTML = "Right Drive Encoder: " + value
+	document.getElementById("slider-encoder").innerHTML = "Right Drive Encoder: " + value
 }
 
 function sliderPotentiometer(key, value, isNew) {
-	document.getElementsById("slider-potentiometer").innerHTML = "Slider Potentiometer: " + value
+	document.getElementById("slider-potentiometer").innerHTML = "Slider Potentiometer: " + value
 }
 
 function climberEncoder(key, value, isNew) {
-	document.getElementsById("climber-encoder").innerHTML = "Climber Encoder: " + value
+	document.getElementById("climber-encoder").innerHTML = "Climber Encoder: " + value
 }
 
 function updateSlider(key, value, isNew) {
-	// Value is in inches.
-	// Min value is 4 (0 + 8"/2)
-	// Max Value is 18 (22 - 8"/2)
-	const tolerance = .125 // 1/8 of an inch tolerance
+	const tolerance = .042 // .042 of tolerance
 
-	newPos = 10 + (parseInt(value)-4) * 230 / 14
+	// calculate the new position
+	newPos = 10 + (parseFloat(value)+1.6) * 230 / 3.2
 
-	update(newPos, Math.abs(parseInt(value)-11) > tolerance ? "red" : "green") 
+	update(newPos, Math.abs(parseFloat(value)) > tolerance ? "red" : "green")
+
+	if (Math.abs(parseFloat(value)) > 1.55) {
+		document.getElementById("bodyid"	).style.backgroundColor = "#e74c3c";
+	}
+	else {
+		document.getElementById("bodyid").style.backgroundColor = "#27ae60";
+	}
+}
+
+
+function speedAndPos(key, value, isNew) {
+	payload = value.split(",")
+	updateSpeedAndPosition(parseFloat(payload[0]).toFixed(3), parseFloat(payload[1]).toFixed(3))
 }
 
 function onValueChanged(key, value, isNew) {

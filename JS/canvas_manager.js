@@ -13,7 +13,7 @@ $(document).ready(function(){
 	canvas = document.getElementById("myCanvas")
 	ctx = canvas.getContext("2d")
 
-	ctx.fillStyle = "000000"
+	ctx.fillStyle = "#000000"
 	ctx.fillRect(0,0,350,350)
 
 	update(10, "red")
@@ -24,19 +24,19 @@ $(document).ready(function(){
 
 function update(absolute, color) {
 	// Repaint all the lines
-	ctx.fillStyle = "FFFFFF"
+	ctx.fillStyle = "#FFFFFF"
 	ctx.fillRect(8,75,2,215)
 	ctx.fillRect(340,75,2,215)
 	ctx.fillRect(174,75,2,215)
 
 	// Move the block over
-	ctx.fillStyle = "000000"
-	ctx.fillRect(SliderBlock.lastPosX,SliderBlock.lastPosY,100,100);
+	ctx.fillStyle = "#000000"
+	ctx.fillRect(SliderBlock.lastPosX-1,SliderBlock.lastPosY,101,100);
 	ctx.fillStyle = color=="red" ? "#e74c3c" : "#27ae60";
 	ctx.fillRect(absolute,SliderBlock.lastPosY,100,100);
 	SliderBlock.lastPosX = absolute
 
-	ctx.fillStyle = "FFFFFF"	
+	ctx.fillStyle = "#FFFFFF"	
 	ctx.fillRect(SliderBlock.lastPosX + 49, SliderBlock.lastPosY,2,100)
 }
 
@@ -52,10 +52,10 @@ function updatePotentiometerStatus(working) {
 }
 
 function updateSpeedAndPosition(speed, position) {
-	ctx.fillStyle = "000000"
+	ctx.fillStyle = "#000000"
 	ctx.fillRect(0,0,350,75)
-	ctx.fillStyle = "27ae60"
+	ctx.fillStyle = "#27ae60"
 	ctx.font = "20px Arial";
-	text = "SPEED: " + speed + " POSITION: " + position
-	ctx.fillText(text,20,50);
+	text = speed + " | " + position
+	ctx.fillText(text,115,50);
 }

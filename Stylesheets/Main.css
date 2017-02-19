@@ -118,7 +118,7 @@ div.robot-status > p, div.subsystem-status > p, div.sensor-status > p {
 #drivetrain-speed {
 	position: absolute;
 	font-size: 40px;
-	top: 400px;
+	top: 350px;
 	left: 25px;
 	font-weight: bold;
 }

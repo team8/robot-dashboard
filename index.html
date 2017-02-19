@@ -7,7 +7,7 @@
 	<script src="JS/Core.js"></script>
 	<link rel="stylesheet" type="text/css" href="Stylesheets/Main.css">
 </head>
-<body>
+<body id="bodyid">
 	<div id="header" class="header">
 		<p class="innerheader" onclick="onNavClick('match')">Match View</p>
 		<p class="innerheader" onclick="onNavClick('debug')">Debug View</p>
@@ -35,8 +35,8 @@
 
 	<div class="subsystem-status debug-container">
 		<!-- Specific Subsystems -->
-		<p id="scaler-current" class="red-at-start">Scaler Current: Unset </p>
-		<p id="scaler-speed" class="red-at-start">Scaler State: Unset </p>
+		<p id="climber-current" class="red-at-start">Scaler Current: Unset </p>
+		<p id="climber-speed" class="red-at-start">Scaler State: Unset </p>
 
 		<p id="intake-status" class="blue-at-start">Intake Status: Unset</p>
 		<p id="spatula-status" class="blue-at-start">Spatula Status: Unset</p> 
