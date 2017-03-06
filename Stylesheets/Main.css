@@ -49,19 +49,19 @@ div.debug-container {
 
 .robot-status {
 	font-size: 20px;
-	margin-left: 40px;
+	margin-left: 20px;
 	display: inline-block;
 }
 
 .subsystem-status {
 	font-size: 20px;
-	margin-left: 40px;
+	margin-left: 20px;
 	display: inline-block;
 }
 
 .sensor-status {
 	font-size: 20px;
-	margin-left: 40px;
+	margin-left: 20px;
 	display: inline-block;	
 }
 
