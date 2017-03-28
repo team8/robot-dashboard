@@ -148,8 +148,13 @@ $(document).ready(function(){
 	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "speed-pos", speedAndPos, true)
 
 	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "climberencoder", climberEncoder, true)
-});
 
+	console.log("Started Nexus Streaming")
+	window.setInterval(function() {
+		document.getElementById("feedgoal").src = "http://10.0.8.2:1180?t=" + new Date().getTime();
+	}, 140)
+
+});
 
 /*
 NetworkTable functions.
