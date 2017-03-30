@@ -151,7 +151,6 @@ $(document).ready(function(){
 
 	console.log("Started Nexus Streaming")
 	window.setInterval(function() {
-		console.log("printing");
 		document.getElementById("feedgoal").src = "http://roborio-8-frc.local:1180?t=" + new Date().getTime();
 	}, 140)
 
