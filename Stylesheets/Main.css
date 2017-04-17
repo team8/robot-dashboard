@@ -72,17 +72,6 @@ div.robot-status > p, div.subsystem-status > p, div.sensor-status > p {
 	border-radius: 10px;
 }
 
-#gametime {
-	top:290px;
-	left:563px;
-	text-align:center;
-	color: black;
-	display:inline;
-	font-size: 120px;
-	position: absolute;
-	border-radius: 15px;
-}
-
 #locked {
 	width: 30px;
 	height: 30px;
@@ -90,35 +79,26 @@ div.robot-status > p, div.subsystem-status > p, div.sensor-status > p {
 	cursor: pointer;
 }
 
-#usbvideoelement {
-    width: 440px;
-    height: 330px;
-    left:10px;
-    top:60px;
-    position: absolute;
-}
-
 #myCanvas {
 	border:1px solid #000000;
 	width: 350px;
 	height: 350px;
-	left: 1150px;
-	top: 60px;
-	position: absolute;
+
 }
 
 #feedgoal {
-	width: 660px;
-	height: 495px;
-	left: 460px;
-	top:60px;
-	position: absolute;
+	width: 400px
+	height: 600px;
 }
 
 #drivetrain-speed {
-	position: absolute;
-	font-size: 40px;
-	top: 350px;
-	left: 25px;
+	font-size: 20px;
 	font-weight: bold;
+	display: inline-block;
+	float: left;
+	margin: 10px
+}
+
+input[type=text] {
+	width: 75px;
 }

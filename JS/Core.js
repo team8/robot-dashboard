@@ -15,6 +15,10 @@ var Navbar = {
 	DebugView: {
 		in_: false,
 		elem: null
+	},
+	TuningView: {
+		in_: false,
+		elem: null
 	}
 }
 
@@ -24,19 +28,29 @@ function setElementStatus() {
 	Navbar.img.elem = document.getElementById("locked")
 	Navbar.MatchView.elem = document.getElementsByClassName("innerheader")[0]
 	Navbar.DebugView.elem = document.getElementsByClassName("innerheader")[1]
+	Navbar.TuningView.elem = document.getElementsByClassName("innerheader")[2]
 	Navbar.MatchView.elem.style.textDecoration = "underline"
 }
 function onNavClick(view) {
 	if (view == 'match') {
 		if (Navbar.locked == true) return
-		Navbar.MatchView.in_ = !Navbar.MatchView.in_
-		Navbar.DebugView.in_ = !Navbar.MatchView.in_
+		Navbar.MatchView.in_ = true
+		Navbar.DebugView.in_ = false
+		Navbar.TuningView.in_ = false
 		onMatchElemFunc()
-	} else {
-		// view == 'debug'
+	} 
+	else if (view == 'tuning') {
+	if (Navbar.locked == true) return
+		Navbar.MatchView.in_ = false
+		Navbar.DebugView.in_ = false
+		Navbar.TuningView.in_ = true
+		onTuningElemFunc()
+	}
+	else {
 		if (Navbar.locked == true) return
-		Navbar.DebugView.in_ = !Navbar.DebugView.in_
-		Navbar.MatchView.in_ = !Navbar.DebugView.in_
+		Navbar.MatchView.in_ = false
+		Navbar.DebugView.in_ = true
+		Navbar.TuningView.in_ = false
 		onDebugElemFunc()
 	}
 } 
@@ -46,19 +60,27 @@ Do something to the elements on match view select.
 */
 function onMatchElemFunc() {
 	Navbar.MatchView.elem.style.textDecoration = "underline"
-	Navbar.DebugView.elem.style.textDecoration = ""	
-	Array.prototype.forEach.call(document.getElementsByClassName("match-container"), function(element) {
-    	element.style.visibility = "visible"
+	Navbar.DebugView.elem.style.textDecoration = ""
+	Navbar.TuningView.elem.style.textDecoration = ""
+	
+	Array.prototype.forEach.call(document.getElementsByClassName("tuning-container"), function(element) {
+		element.style.display = "none"
 	});
 	Array.prototype.forEach.call(document.getElementsByClassName("debug-container"), function(element) {
-    	element.style.visibility = "hidden"
+    	element.style.display = "none"
 	});
 	Array.prototype.forEach.call(document.getElementsByClassName("subsystem-states"), function(element) {
-		element.style.visibility = "hidden"
+		element.style.display = "none"
 	});
-
-	document.getElementById("usbvideoelement").style.visibility = "visible"
-	document.getElementById("feedgoal").style.visibility = "visible"
+	Array.prototype.forEach.call(document.getElementsByClassName("robot-status"), function(element) {
+		element.style.display = "none"
+	});
+	Array.prototype.forEach.call(document.getElementsByClassName("match-container"), function(element) {
+		element.style.display = "inline-block"
+	});
+	
+	//document.getElementById("usbvideoelement").style.display = "inline-block"
+	document.getElementById("feedgoal").style.display = "inline-block"
 }
 
 /*
@@ -67,22 +89,52 @@ Do something to the elements on debug mode select.
 function onDebugElemFunc() {
 	Navbar.MatchView.elem.style.textDecoration = ""
 	Navbar.DebugView.elem.style.textDecoration = "underline"
+	Navbar.TuningView.elem.style.textDecoration = ""
+	
 	Array.prototype.forEach.call(document.getElementsByClassName("match-container"), function(element) {
-		element.style.visibility = "hidden"
+		element.style.display = "none"
+	});
+	Array.prototype.forEach.call(document.getElementsByClassName("tuning-container"), function(element) {
+		element.style.display = "none"
 	});
 	Array.prototype.forEach.call(document.getElementsByClassName("debug-container"), function(element) {
-    	element.style.visibility = "visible"
+    	element.style.display = "inline-block"
 	});
 	Array.prototype.forEach.call(document.getElementsByClassName("subsystem-states"), function(element) {
-		element.style.visibility = "visible"
+		element.style.display = "inline-block"
 	});
 	Array.prototype.forEach.call(document.getElementsByClassName("robot-status"), function(element) {
-		element.style.visibility = "visible"
+		element.style.display = "inline-block"
+	});
+	
+
+	//document.getElementById("usbvideoelement").style.display = "none"
+	document.getElementById("feedgoal").style.display = "none"
+}
+
+function onTuningElemFunc() {
+	Navbar.MatchView.elem.style.textDecoration = ""
+	Navbar.DebugView.elem.style.textDecoration = ""
+	Navbar.TuningView.elem.style.textDecoration = "underline"
+	
+	Array.prototype.forEach.call(document.getElementsByClassName("match-container"), function(element) {
+		element.style.display = "none"
+	});
+	Array.prototype.forEach.call(document.getElementsByClassName("debug-container"), function(element) {
+    	element.style.display = "none"
+	});
+	Array.prototype.forEach.call(document.getElementsByClassName("subsystem-states"), function(element) {
+		element.style.display = "none"
+	});
+	Array.prototype.forEach.call(document.getElementsByClassName("robot-status"), function(element) {
+		element.style.display = "none"
+	});
+	Array.prototype.forEach.call(document.getElementsByClassName("tuning-container"), function(element) {
+		element.style.display = "inline-block"
 	});
 
-
-	document.getElementById("usbvideoelement").style.visibility = "hidden"
-	document.getElementById("feedgoal").style.visibility = "hidden"
+	//document.getElementById("usbvideoelement").style.display = "none"
+	document.getElementById("feedgoal").style.display = "none"
 }
 /*
 Updates the Status of the Lock Icon
@@ -94,10 +146,13 @@ function updateLocked() {
 		// The mouse will display a certain symbol when hovering over the headers
 		Navbar.MatchView.elem.style.cursor = "not-allowed"
 		Navbar.DebugView.elem.style.cursor = "not-allowed"
+		Navbar.TuningView.elem.style.cursor = "not-allowed"
+
 	} else {
 		Navbar.img.elem.src = Navbar.img.unlocked_img;
 		Navbar.MatchView.elem.style.cursor = "pointer"
 		Navbar.DebugView.elem.style.cursor = "pointer"
+		Navbar.TuningView.elem.style.cursor = "pointer"
 	}
 }
 
@@ -148,12 +203,7 @@ $(document).ready(function(){
 	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "speed-pos", speedAndPos, true)
 
 	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "climberencoder", climberEncoder, true)
-
-	console.log("Started Nexus Streaming")
-	window.setInterval(function() {
-		document.getElementById("feedgoal").src = "http://roborio-8-frc.local:1180?t=" + new Date().getTime();
-	}, 140)
-
+	
 });
 
 /*
@@ -336,4 +386,24 @@ function speedAndPos(key, value, isNew) {
 
 function onValueChanged(key, value, isNew) {
 	console.log(key + ": " + value)
+}
+
+function submitPID() {
+	kP = Number(document.getElementById("kP").value)
+	kI = Number(document.getElementById("kI").value)
+	kD = Number(document.getElementById("kD").value)
+	kV = Number(document.getElementById("kV").value)
+	kA = Number(document.getElementById("kA").value)
+	TurnkP = Number(document.getElementById("TurnkP").value)
+	TurnkD = Number(document.getElementById("TurnkD").value)
+
+
+	NetworkTables.putValue(NT_TABLE_ID_ADDRESS + "kP", kP)
+	NetworkTables.putValue(NT_TABLE_ID_ADDRESS + "kI", kI)
+	NetworkTables.putValue(NT_TABLE_ID_ADDRESS + "kD", kD)
+	NetworkTables.putValue(NT_TABLE_ID_ADDRESS + "kV", kV)
+	NetworkTables.putValue(NT_TABLE_ID_ADDRESS + "kA", kA)
+	NetworkTables.putValue(NT_TABLE_ID_ADDRESS + "TurnkP", TurnkP)
+	NetworkTables.putValue(NT_TABLE_ID_ADDRESS + "TurnkD", TurnkD)
+
 }

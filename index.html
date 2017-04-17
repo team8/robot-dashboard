@@ -11,50 +11,71 @@
 	<div id="header" class="header">
 		<p class="innerheader" onclick="onNavClick('match')">Match View</p>
 		<p class="innerheader" onclick="onNavClick('debug')">Debug View</p>
+		<p class="innerheader" onclick="onNavClick('tuning')">Tuning View</p>
 		<img id="locked" src="Images/unlocked.jpeg" onclick='updateLocked()'></img>
 	</div>
 
-    <video autoplay="true" id="usbvideoelement"> </video>
+    <!-- <video autoplay="true" id="usbvideoelement"> </video> -->
 	<!-- <img id = "feedgoal" src = "http://10.0.8.3/mjpg/video.mjpg" alt = "no goal stream"> -->
-	<img id="feedgoal" src="http://roborio-8-frc.local:1180/" alt="No Nexus">
 
-	<canvas id="myCanvas" width="350" height="350"></canvas>
+	<div id="left" style="margin: 10px; float:left;">
+		<div class="match-container" style="display:none;">
+			<div style="display:inline-block; width:400px; height:600px; border: 1px solid; float: left;">
+				<img id="feedgoal" src="http://roborio-8-frc.local:1180/" alt="No Nexus">
+			</div>
+			<p id="drivetrain-speed"> Left Speed: UNSET <br> Right Speed: UNSET</p>
+		</div>
+	
+		<div class="robot-status debug-container" style="display:none;"> 
+			<!--  Full Robot State  -->
+			<p id="robostatus" class="red-at-start">Robot status unavailable</p>
+			<p id="networkstatus">Network status unavailable</p>
+			<p id="match-time" class="yellow-at-start">Match time: Not in a match</p>
+			<p id="game-period" class="yellow-at-start">Game Period: Not in a match</p>
+			<p id="brownout-status" class="yellow-at-start">Brownout status: Robot disconnected</p>
+			<p id="battery" class="yellow-at-start"> Battery voltage: Robot disconnected</p>	
+		</div>
 
-	<div class="match-container">
-		<p id="drivetrain-speed"> Left Speed: UNSET <br> Right Speed: UNSET</p>
+		<div class="subsystem-status debug-container" style="display:none;">
+			<!-- Specific Subsystems -->
+			<p id="climber-current" class="red-at-start">Scaler Current: Unset </p>
+			<p id="climber-speed" class="red-at-start">Scaler State: Unset </p>
+
+			<p id="intake-status" class="blue-at-start">Intake Status: Unset</p>
+			<p id="spatula-status" class="blue-at-start">Spatula Status: Unset</p> 
+
+			<p id="flipper-status" class="dark-at-start">Flipper Status: Unset</p>
+		</div>
+
+		<div class="sensor-status debug-container" style="display:none;">
+			<p id="drive-encoder-left" class="blue-at-start">Left Drive Encoder: Unset</p>		
+			<p id="drive-encoder-right" class="blue-at-start">Right Drive Encoder: Unset</p>
+
+			<p id="slider-encoder" class="blue-at-start">Slider Encoder: Unset</p>
+			<p id="slider-potentiometer" class="blue-at-start">Slider Potentiometer: Unset</p>
+
+			<p id="climber-encoder" class="blue-at-start">Climber Encoder: Unset</p>
+		</div>
+	
+		<div class="tuning-container" style="display:none;">
+				<form id="pid">
+					<label>kP:  <input type="text" id="kP"></input></label></br>
+					<label>kI:  <input type="text" id="kI"></input></label></br>
+					<label>kD:  <input type="text" id="kD"></input></label></br>
+					<label>kV:  <input type="text" id="kV"></input></label></br>
+					<label>kA:  <input type="text" id="kA"></input></label></br>
+					<label>Turn kP:  <input type="text" id="TurnkP"></input></label></br>
+					<label>Turn kD:  <input type="text" id="TurnkD"></input></label></br>
+					</br>
+					<input type="button" value="Submit" onClick="javascript:submitPID()">
+				</form>
+		</div>
 	</div>
 	
-	<div class="robot-status debug-container"> 
-		<!--  Full Robot State  -->
-		<p id="robostatus" class="red-at-start">Robot status unavailable</p>
-		<p id="networkstatus">Network status unavailable</p>
-		<p id="match-time" class="yellow-at-start">Match time: Not in a match</p>
-		<p id="game-period" class="yellow-at-start">Game Period: Not in a match</p>
-		<p id="brownout-status" class="yellow-at-start">Brownout status: Robot disconnected</p>
-		<p id="battery" class="yellow-at-start"> Battery voltage: Robot disconnected</p>	
+	<div id="right" style="width:350px; float:right; margin: 10px;">
+		<canvas id="myCanvas" width="350" height="350"></canvas>
+		<p style="text-align:center;display:inline;font-size: 80px;">Time: <span id="gametime">90</span></p>	
 	</div>
-
-	<div class="subsystem-status debug-container">
-		<!-- Specific Subsystems -->
-		<p id="climber-current" class="red-at-start">Scaler Current: Unset </p>
-		<p id="climber-speed" class="red-at-start">Scaler State: Unset </p>
-
-		<p id="intake-status" class="blue-at-start">Intake Status: Unset</p>
-		<p id="spatula-status" class="blue-at-start">Spatula Status: Unset</p> 
-
-		<p id="flipper-status" class="dark-at-start">Flipper Status: Unset</p>
-	</div>
-
-	<div class="sensor-status debug-container">
-		<p id="drive-encoder-left" class="blue-at-start">Left Drive Encoder: Unset</p>		
-		<p id="drive-encoder-right" class="blue-at-start">Right Drive Encoder: Unset</p>
-
-		<p id="slider-encoder" class="blue-at-start">Slider Encoder: Unset</p>
-		<p id="slider-potentiometer" class="blue-at-start">Slider Potentiometer: Unset</p>
-
-		<p id="climber-encoder" class="blue-at-start">Climber Encoder: Unset</p>
-	</div>
-
-	<p id="gametime">90</p>	
+	
 </body>
 </html>
