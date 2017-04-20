@@ -149,12 +149,20 @@ $(document).ready(function(){
 
 	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "climberencoder", climberEncoder, true)
 
+	NetworkTables.addKeyListener(NT_TABLE_ID_ADDRESS + "automodestring", auto, true)
+
 	console.log("Started Nexus Streaming")
 	window.setInterval(function() {
 		document.getElementById("feedgoal").src = "http://roborio-8-frc.local:1180?t=" + new Date().getTime();
 	}, 140)
 
 });
+
+
+function auto(key, value, isNew) {
+	document.getElementById("auto-string").innerHTML = "Auto: " + value
+}
+
 
 /*
 NetworkTable functions.
