@@ -2,6 +2,9 @@
 
 FRC Team #8 project to make a better robot dashboard.
 
+![](ex1.png)
+![](ex2.png)
+
 ### Dependencies
 
 Python 3 must be installed!
